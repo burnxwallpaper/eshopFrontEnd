@@ -1,0 +1,32 @@
+.productImg{
+    width: 120px;
+    height: 120px;
+  }
+
+.product{
+    position: relative;
+    width: 23%;
+    /*
+    border-radius: 5px ;
+    border-color: black;
+    border-width: 3px;
+    border-style:solid;
+    */
+    margin:10px auto;
+    float: left;
+ 
+
+}
+@media screen and (max-width: 768px) {
+  .product {
+        width:46%;
+    }
+}
+
+@media screen and (max-width: 474px) {
+  .product {
+        width:80%;
+        min-width: 150px;
+        float: none;
+    }
+}

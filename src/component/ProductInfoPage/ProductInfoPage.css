@@ -1,0 +1,40 @@
+.ProductInfoPage{
+    width:600px;
+    margin: 100px auto;
+}
+
+.productInfoContainer{
+    display: grid;
+    grid-template-columns: [line1] 300px [line2] 250px [line-end];
+    grid-template-rows: [row-1-start] 400px [row-2-start] auto [row-end];
+}
+
+.productInfoImgArea{
+
+    grid-column-start: line1;
+}
+
+.productBuyArea{
+    text-align: left;
+    grid-column-start: line2;
+    left:0;
+}
+
+.addToCartArea{
+    margin-left:40px;
+}
+
+
+
+.productCommentArea{
+    grid-column-start: line1;
+    grid-column-end: line-end;
+    grid-row-start: [row-2-start];
+
+}
+
+.productBuyArea input{
+    width:50px;
+    text-align: center;
+}
+

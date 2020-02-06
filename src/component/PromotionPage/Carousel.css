@@ -1,0 +1,93 @@
+.carousel{
+    position:relative;
+    margin:0 auto;
+    margin-top: 100px;
+    width: 600px;
+    height:300px;
+}
+
+.carouselFrame{
+    position: relative;
+    margin:0 auto;
+    width: 500px;
+    height:300px;
+    overflow:hidden;
+    border-radius: 5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    scroll-behavior: smooth;
+
+}
+
+.carouselList{
+    display: flex;
+    position: absolute;
+    width: 1500px;
+    height: 100%;
+    transition: 0.7s;
+
+
+
+}
+
+.carouselItem1{
+    flex: 0 0 33.33%;
+
+    position: relative;
+
+    background-color: burlywood;
+}
+
+.carouselItem2{
+    flex: 0 0 33.33%;
+    position: relative;
+
+
+    background-color: chartreuse;
+}
+
+.carouselItem3{
+    position: relative;
+    flex: 0 0 33.333%;
+
+    background-color: royalblue;
+}
+
+.carouselBtn{
+    position: absolute;
+    border-color: black;
+
+    border-width: 5px 5px 0 0;
+    border-style: solid;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+
+.carouselBtn.leftCarouselBtn{
+    left: 0;
+    top:45%;
+    transform: rotate(-135deg);
+
+}
+.carouselBtn.rightCarouselBtn{
+    right: 0;
+    bottom:40%;
+    transform: rotate(45deg);
+
+
+}
+
+.carouselDot{
+    display: inline-block;
+    margin: 5px 5px;
+    
+    width: 10px;
+    height:10px;
+    border-radius: 5px;
+    bottom:0;
+    background-color: slategray;
+    cursor: pointer;
+}
