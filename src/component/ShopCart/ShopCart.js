@@ -87,18 +87,20 @@ function ShopCart({ shopCart, updateShopCart, products }) {
 
                 <div className="shopCart">
                     <h3>Shop Cart</h3>
-                    <button onClick={() => deleteProduct("all")}>Clear all</button>
+                    <button
+                        className="btn btn-light"
+                        onClick={() => deleteProduct("all")}>Clear all</button>
                     <div className="shopCartList">
 
                         {Summary}
 
 
                     </div>
-                    <div className="shopCartSummary">
+                    {(total !== 0) && (<div className="shopCartSummary">
                         <h4>Total <br></br>${total}</h4>
 
-                        {total !== 0 && (<div className="checkOut"><h4><a href="/checkout">checkout!</a></h4></div>)}
-                    </div>
+                        {total !== 0 && (<div className="checkOut"><h4><a href="/checkout">Checkout</a></h4></div>)}
+                    </div>)}
                 </div>
             </div>
         </>

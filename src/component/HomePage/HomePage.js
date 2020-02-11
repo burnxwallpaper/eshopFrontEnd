@@ -2,6 +2,7 @@ import React from 'react';
 import Product from '../Product'
 import SearchBar from '../SearchBar/SearchBar';
 import ShopCart from '../ShopCart/ShopCart'
+import Spinner from '../Common/Spinner'
 import './HomePage.css'
 
 function HomePage({
@@ -13,7 +14,10 @@ function HomePage({
         let pageNum = Math.ceil((filteredResult.length > 0 ? filteredResult : searchResult).length / dataPerPage)
         for (let i = 1; i <= pageNum; i++) {
             bar.push(<button key={`page${i}`} className="pageNavButton"
-                style={{ backgroundColor: `${currentPage === i ? "rgb(158, 227, 248)" : "white"}` }}
+                style={{
+                    backgroundColor: `${currentPage === i ? "rgb(158, 227, 248)" : "white"}`
+                    //color: `${currentPage === i ? "white" : "black"}`
+                }}
                 onClick={() => {
                     direcToPage(i);
                     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -55,19 +59,21 @@ function HomePage({
 
             <div>{displayNoResult}</div>
             <div className="mainArea">
-                <div className="productArea">
-                    <div className="products">
-                        {
-                            pagination().map(product => <Product key={product._id} product={product} updateShopCart={updateShopCart} />)
-                        }
-                    </div>
-                </div>
+                {loading && <Spinner />}
+                {!loading &&
+                    <div className="productArea">
+                        <div className="products">
+                            {
+                                (pagination().map(product => <Product key={product._id} product={product} updateShopCart={updateShopCart} />))
+                            }
+                        </div>
+                    </div>}
 
-                <div className="pageNavBar">
+                {!loading && <div className="pageNavBar">
 
                     <br></br>
                     {pageNavBar(dataPerPage)}
-                </div>
+                </div>}
 
 
             </div>

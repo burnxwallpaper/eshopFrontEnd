@@ -1,4 +1,6 @@
 .productImg{
+  display: block;
+margin: 0 auto;
     width: 120px;
     height: 120px;
   }
@@ -26,7 +28,11 @@
 @media screen and (max-width: 474px) {
   .product {
         width:80%;
-        min-width: 150px;
+        
         float: none;
     }
+  .productImg{
+    margin-left: unset;
+    transform: unset;
+  }
 }

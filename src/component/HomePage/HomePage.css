@@ -5,6 +5,7 @@
   }
   
   .pageNavBar{
+    width: 100vh;
     position: absolute;
     left:50%;
     transform:translateX(-50%) ;
@@ -49,10 +50,16 @@
   }
 
   .pageNavButton{
+
     width: 25px;
-    background-color: bisque;
+    height:30px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 15px;
+    background-color: rgb(158, 227, 248);
     border-radius: 2px 2px 2px 2px;
     border: 1px solid grey;
     margin: 0 2px;
+
 
   }

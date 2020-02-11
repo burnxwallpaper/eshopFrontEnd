@@ -1,0 +1,122 @@
+.TransportPage{
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+
+
+}
+.TransportPage h3{
+    text-align: left;
+    margin-bottom: 40px;
+
+
+}
+
+.TransportMethodForm{
+    width: 80%;
+    margin: 0 auto;
+}
+.TransportMethodForm>label{
+    font-size: 2rem;
+    display: block;
+
+
+    border-bottom: 2px solid black;
+    z-index: 2;
+    text-align: left;
+}
+
+.SelfPickUp,.Delivery{
+    
+    position: absolute;
+    opacity: 0;
+
+   left:20%;
+}
+
+.SelfPickUpDetail,.DeliveryDetail{
+    font-size: 1.5rem;
+text-align: left;
+    display: none;
+    height:150px;
+    width: 100%;
+    background-color: rgb(250, 230, 193);
+
+}
+
+
+
+/*.SelfPickUp input[type="radio"]:checked .SelfPickUpLocation{
+    display: block !important;
+}*/
+
+.TransportMethodForm>input:checked +label + div >div{
+
+    display: block;
+    
+    animation: dropdown 0.7s ease-in-out;
+
+}
+
+.TransportMethodForm>input:checked +label + div{
+    height:150px;
+transition: 0.7s;
+background-color: rgb(250, 230, 193);
+}
+
+.Wrapper{
+    transition: 0.3s;
+    height:0;
+    margin-top: -8px;
+    overflow: hidden;
+    background-color: rgb(250, 230, 193);
+    margin-bottom: 20px;
+    padding:0 10% ;
+    border-width: 0px 1px 1px 1px;
+    border-color: gray;
+    border-style: groove;
+}
+
+
+.DeliveryDetail >label{
+    position: absolute;
+
+    transition: 0.5s ease-in-out;
+}
+
+.DeliveryDetail input{
+    display: block;
+    background-color: rgb(250, 230, 193);
+    border:none;
+    border-bottom:1px solid black;
+    width: 100%;
+    margin: 0 auto;
+    transform: translateY(100%);
+
+  }
+
+  .DeliveryDetail input:focus {
+    background-color: white;
+}
+
+.DeliveryDetail:focus-within >label{
+    transform: translateY(-100%);
+    font-size: 1.3rem;
+
+    text-shadow: 0px 1px gray;
+}
+.DeliveryDetail input:valid ~label{
+    transform: translateY(-100%);
+    font-size: 1.3rem;
+    color:rgb(78, 44, 13)
+}
+
+
+@keyframes dropdown {
+    from{
+        transform: translateY(-80%) ;
+    }
+
+    to{
+        transform: translateY(0%) ;}
+}

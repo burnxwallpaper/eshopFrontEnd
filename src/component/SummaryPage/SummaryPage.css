@@ -1,0 +1,149 @@
+.SummaryPage{
+    position: relative;
+    top: 100px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+.SummaryTable{
+
+    width:80vw;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+
+}
+
+.orderheader{
+    border-bottom: 1px groove black;
+    text-align: left;
+}
+
+.orderTransport{
+    text-align: left;
+}
+
+.orderTransport p{
+    font-size: 1.3rem;
+    color: rgb(63, 58, 58) ;
+}
+
+.SummaryProductList{
+
+    margin: 0 auto;
+}
+
+.SummaryProduct{
+    display: grid;
+    grid-template-columns: 20% 120px 40% 30%;
+    grid-template-rows: 0 150px;
+}
+
+
+.SummaryProduct .tempIndex{
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 2;
+    font-size: 2rem;
+    border-radius: 50%;
+    border:1px groove rgb(126, 119, 119) ;
+    width: 3rem;
+    height:3rem;
+    background-color: white;
+    position: relative;
+    top:50%;
+    left:20%;
+    transform: translateY(-50%);
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.SummaryProduct img{ 
+    position: relative;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+    top:50%;
+    transform: translateY(-50%);
+}
+
+.SummaryProduct .productDescription{
+
+    position: relative;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    text-align: left;
+    font-size: 1.1rem;
+    margin-top:50px;
+    margin-left:10px
+
+
+}
+
+.SummaryProduct .productDescription .smalldescriptionSum{
+    display: none;
+}
+
+.SummaryProduct .descriptionSum{
+    position: relative;
+    grid-column-start: 4;
+    grid-column-end: 4;
+    text-align: left;
+    font-size: 1.1rem;
+    margin-top:50px;
+}
+
+@media screen and (max-width:518px) {
+    .SummaryProduct .productDescription .smalldescriptionSum{
+        display: block;
+        
+    }
+    .SummaryProduct .productDescription {
+        margin-top: 30px;
+        font-size: 1rem;
+        
+    }
+    .SummaryProduct{
+        display: grid;
+        grid-template-columns: 20% 120px 80% ;
+
+    }    
+
+}
+@media screen and (max-width:380px) {
+    .SummaryProduct{
+        display: block;
+    }
+    .SummaryProduct img{
+        display: block;
+        margin-left:50%;
+        transform: translateX(-50%);
+
+    }
+    .SummaryProduct .tempIndex{
+        top:10px;
+        float: left;
+        left:0;
+        
+    }
+    .SummaryProduct .productDescription{
+        margin:unset;
+        vertical-align:middle;
+        font-size: 1rem;
+        display:inline-block
+    }
+    .SummaryProduct .descriptionSum{
+        display: none;
+    }
+
+
+}
+@media screen and (max-width:281px) {
+    .orderTransport h4{
+        font-size: 1.2rem;
+    }
+
+    .orderTransport p{
+        font-size: 1.2rem;
+    }
+}

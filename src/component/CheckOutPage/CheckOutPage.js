@@ -1,18 +1,18 @@
 import React from 'react';
 import './CheckOutPage.css'
+import Spinner from '../Common/Spinner'
 
 
 function CheckOutPage({ products, shopCart, updateShopCart }) {
+    function handleChange(e) {
+        let { name, value, max, min } = e.target;
+        if (value > Number(max) || value < Number(min)) return
+        //value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+        updateShopCart(prev => ({ ...prev, [name]: value }))
+        e.preventDefault()
 
-    function changeQuantity(add, product) {
-        updateShopCart(
-            prevState => ({
-                ...prevState,
-                [product]: add ? Number(prevState[product]) + 1 :
-                    //max=0
-                    (prevState[product] - 1 > 1 ? Number(prevState[product]) - 1 : 1)
-            }))
     }
+
     function deleteProduct(product) {
         const { [product]: tmp, ...rest } = shopCart
         updateShopCart(
@@ -30,38 +30,40 @@ function CheckOutPage({ products, shopCart, updateShopCart }) {
         if (exactProduct !== undefined) {
             total += exactProduct.price * quantity;
             Summary.push(
-                <div key={productID}>
+                <div key={productID} className="CheckoutProduct">
                     <br></br>
                     <img src={exactProduct.image} className="productImg" alt=""></img>
 
-                    <br></br>
-                    Product Name:{exactProduct.name}
-                    <br></br>
-                    Price: {exactProduct.price}
-                    <br></br>
-                    Sum: {exactProduct.price * quantity}
-                    <br></br>
-                    Quantity:{quantity}
+                    <div className="description">
+                        <br></br>
+                        <b >Name:</b>{exactProduct.name}
+                        <br></br>
+                        <b >Price:</b> ${exactProduct.price}
+                        <br></br>
+                        <b >Sum:</b> ${exactProduct.price * quantity}
+                        <br></br>
+                        <b >Quantity:</b>
 
-                    <button onClick={() => changeQuantity(true, productID)}>
-                        +</button>
-                    <button onClick={() => changeQuantity(false, productID)}>
-                        -</button>
-                    <button onClick={() => deleteProduct(productID)}>Delete</button>
+                        <input className="shopCartInputQty" type="number" min="1" max="99"
+                            name={exactProduct._id} value={quantity} onChange={handleChange} required></input>
+                        <button onClick={() => deleteProduct(productID)}><i className="far fa-trash-alt"></i></button>
+                    </div>
                 </div>);
         }
     }
-
-    return (
+    if (total === 0) { return <Spinner /> }
+    else return (
         <div className="CheckOutPage">
+
             <h1>CheckOutPage</h1>
             <br></br>
-            {Summary}
+            <div className="">{Summary}</div>
+
             <br></br>
             <br></br>
             <h2>Total <br></br>${total}</h2>
             <br></br>
-            <button>Confirm</button>
+            <a href='/transport' className="btn btn-info">Confirm</a>
 
 
         </div>

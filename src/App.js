@@ -6,6 +6,9 @@ import Header from './component/navbar/Header';
 import HomePage from './component/HomePage/HomePage';
 import ContactPage from './ContactPage/ContactPage';
 import CheckOutPage from './component/CheckOutPage/CheckOutPage';
+import SummaryPage from './component/SummaryPage/SummaryPage'
+import TransportPage from './component/TransportPage/TransportPage'
+import PaymentPage from './component/PaymentPage/PaymentPage'
 import PageNotFound from './component/PageNotFound';
 //import LoginPage from './component/LoginPage/LoginPage';
 import ProfilePage from './component/ProfilePage/ProfilePage';
@@ -48,7 +51,7 @@ function App() {
   }
 
   function search(e) {
-    let result = searchResult.filter(product => product.name.includes(value));
+    let result = searchResult.filter(product => product.name.includes(value.toLowerCase()));
     //result.length > 0 ? noResult(true) : noResult(false);
     result.length > 0 ? filter(result) : filter(searchResult);
     direcToPage(1);
@@ -121,6 +124,23 @@ function App() {
             loading={loading}
             setLoading={setLoading}
           />} />
+        <Route path="/confirm" render={(props) =>
+          <SummaryPage
+            {...props}
+            products={searchResult}
+            shopCart={shopCart}
+            updateShopCart={updateShopCart}
+
+          />} />
+        <Route path="/transport" render={(props) =>
+          <TransportPage
+            {...props}
+          />} />
+        <Route path="/payment" render={(props) =>
+          <PaymentPage
+            {...props}
+          />} />
+
         <Route component={PageNotFound} />
       </Switch>
 

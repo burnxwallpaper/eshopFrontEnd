@@ -92,19 +92,22 @@
 
 .checkOut{
     display: block;
-    background-color:  tan;
+    background-color:  rgb(205, 223, 224);
+
     border: 2px solid black; 
-    border-radius: 3px;
-    box-shadow: 0px 2px 2px grey;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px grey;
 }
 
 .checkOut:hover{
-    background-color: hotpink;
+    background-color: rgb(103, 135, 221);
+    color:white;
 }
 
 .shopCartSummary{
-    position: fixed;
+    position: relative;
     bottom:30px;
+    margin-top: 50px;
     max-height: 30%;
     font-size: 3rem;
 }
