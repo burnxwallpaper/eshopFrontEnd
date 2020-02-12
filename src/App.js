@@ -10,7 +10,7 @@ import SummaryPage from './component/SummaryPage/SummaryPage'
 import TransportPage from './component/TransportPage/TransportPage'
 import PaymentPage from './component/PaymentPage/PaymentPage'
 import PageNotFound from './component/PageNotFound';
-//import LoginPage from './component/LoginPage/LoginPage';
+import LoginPage from './component/LoginPage/LoginPage';
 import ProfilePage from './component/ProfilePage/ProfilePage';
 import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
 import Carousel from './component/PromotionPage/Carousel';
@@ -109,7 +109,7 @@ function App() {
             updateShopCart={updateShopCart}
 
           />} />
-
+        <Route path="/login" component={LoginPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/promotion" component={Carousel} />
         <Route path="/product/:slug" render={(props) =>
