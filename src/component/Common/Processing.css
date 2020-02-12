@@ -1,0 +1,42 @@
+.PaymentProcessing{
+    font-family: Arial;
+    position: fixed;
+    padding:3px;
+    color: black;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid rgb(240, 223, 223);
+    box-shadow: 0px 3px 3px gray;
+    width: 200px;
+    height:200px;
+    z-index:99 ;
+    right:50%;
+    transform: translateX(50%) scale(0.5);
+    top: 80px;
+    animation-name:popup ;
+    animation-duration: 0.5s;
+    animation-timing-function:ease-out ;
+    animation-direction: alternate; 
+    animation-fill-mode:forwards ; 
+    visibility: hidden;
+    background-color: rgb(175, 240, 236);
+
+
+}
+
+
+
+
+@keyframes popup{
+    0%{ 
+
+        visibility: visible;}
+
+    100%{
+        transform: translateX(50%) scale(1) ;
+        visibility: visible;}
+
+
+
+
+}

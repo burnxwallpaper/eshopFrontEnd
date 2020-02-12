@@ -51,15 +51,13 @@ function HomePage({
         <>
 
             <SearchBar updateShopCart={updateShopCart} search={search} handleChange={handleChange} value={value} />
-
-            <ShopCart updateShopCart={updateShopCart} shopCart={shopCart} handleChange={handleChange}
-                products={products}
-                value={value}
-                setValue={setValue} />
-
-            <div>{displayNoResult}</div>
             <div className="mainArea">
+
                 {loading && <Spinner />}
+                <ShopCart updateShopCart={updateShopCart} shopCart={shopCart} handleChange={handleChange}
+                    products={products}
+                    value={value}
+                    setValue={setValue} />
                 {!loading &&
                     <div className="productArea">
                         <div className="products">

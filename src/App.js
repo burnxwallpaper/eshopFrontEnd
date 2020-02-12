@@ -15,6 +15,7 @@ import ProfilePage from './component/ProfilePage/ProfilePage';
 import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
 import Carousel from './component/PromotionPage/Carousel';
 import * as APIfunction from './APIfunction/APIfunction'
+import CompletedPage from './component/CompletedPage/CompletedPage'
 
 function App() {
   let productlist;
@@ -140,7 +141,10 @@ function App() {
           <PaymentPage
             {...props}
           />} />
-
+        <Route path="/completed" render={(props) =>
+          <CompletedPage
+            {...props}
+          />} />
         <Route component={PageNotFound} />
       </Switch>
 

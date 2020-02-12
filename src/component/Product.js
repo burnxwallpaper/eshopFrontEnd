@@ -1,6 +1,6 @@
 import React from 'react';
 import './Product.css'
-import SuccessNotify from '../common/Toastbar/SuccessNotify'
+import SuccessNotify from './Common/SuccessNotify'
 
 
 

@@ -31,8 +31,5 @@ margin: 0 auto;
         
         float: none;
     }
-  .productImg{
-    margin-left: unset;
-    transform: unset;
-  }
+
 }

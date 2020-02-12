@@ -44,12 +44,6 @@ text-align: left;
 
 }
 
-
-
-/*.SelfPickUp input[type="radio"]:checked .SelfPickUpLocation{
-    display: block !important;
-}*/
-
 .TransportMethodForm>input:checked +label + div >div{
 
     display: block;

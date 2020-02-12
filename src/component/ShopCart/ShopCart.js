@@ -82,8 +82,12 @@ function ShopCart({ shopCart, updateShopCart, products }) {
     }
     return (
         <>
+            <input className="shopCartCheckbox" id="shopCartCheckbox" type="checkbox"></input>
+            <label className="shopCartCheckboxlabel" htmlFor="shopCartCheckbox"><i class="fas fa-shopping-cart"></i></label>
+
             <div className="shopCartArea">
-                <span className="icon cart"></span>
+
+
 
                 <div className="shopCart">
                     <h3>Shop Cart</h3>

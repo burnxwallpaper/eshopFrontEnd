@@ -1,11 +1,12 @@
 .mainArea{
-    position: relative;;
-    top:200px
+    position: relative;
+    top:200px;
+    width:100%;
     
   }
   
   .pageNavBar{
-    width: 100vh;
+    width: 100%;
     position: absolute;
     left:50%;
     transform:translateX(-50%) ;
@@ -13,6 +14,7 @@
   
   .productArea{
     position: relative;
+    width:100vw;
     min-height: 500px;
     margin-left: 5%;
     margin-right: 5%;
@@ -24,12 +26,11 @@
 
   @media screen and (max-width: 768px) {
     .productArea {
-      position: relative;
 
-      margin-left: 5%;
-      margin-right: 5%;
-      left:50%;
-    transform:translateX(-50%) ;
+
+      margin-left: unset;
+      margin-right: unset;
+
     }
 }
   
@@ -63,3 +64,5 @@
 
 
   }
+
+  

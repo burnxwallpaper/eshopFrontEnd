@@ -4,6 +4,7 @@ function Spinner({ style }) {
     return (
         <>
             <div style={style} className="spinner1"></div>
+
         </>
     );
 }

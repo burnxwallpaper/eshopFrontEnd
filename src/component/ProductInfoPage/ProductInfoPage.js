@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductInfoPage.css';
 import ShopCart from '../ShopCart/ShopCart'
 import Mockdata from '../Mockdata'
-import SuccessNotify from '../../common/Toastbar/SuccessNotify'
+import SuccessNotify from '../Common/SuccessNotify'
 
 
 function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, value, setValue, loading, setLoading }) {
