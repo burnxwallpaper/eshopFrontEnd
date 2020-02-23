@@ -34,6 +34,9 @@ function Header({ loginStatus, setLogin, updateShopCart }) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active" onClick={collapse}>
+                <Link className="nav-link" to={"/"}>Home</Link>
+              </li>
+              <li className="nav-item active" onClick={collapse}>
                 <Link className="nav-link" to={"/promotion"}>Promotion</Link>
               </li>
               <li className="nav-item active" onClick={collapse}>

@@ -68,7 +68,7 @@ function SummaryPage({ products, shopCart, updateShopCart, setPaymentStep }) {
 
                 </div>
             </div>
-            <button className="btn btn-info"><Link to='/payment'>Confirm</Link></button>
+            <div className="btn btn-info"><Link to='/payment'>Confirm</Link></div>
 
 
         </div>
