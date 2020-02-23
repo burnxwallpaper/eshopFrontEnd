@@ -4,7 +4,7 @@ import Spinner from './Spinner'
 import Checkmark from './Checkmark'
 import './Processing.css'
 import freeze from './freeze'
-function Processing(remove = true, words = "Processing...") {
+async function Processing(func, words = "Processing...") {
     const basic = "PaymentProcessing"
 
 
@@ -12,11 +12,27 @@ function Processing(remove = true, words = "Processing...") {
     let location = document.getElementById("toastBar").appendChild(temp);
 
     render(<div className={[basic].join(' ')}><br></br>{words}{<Spinner />}</div>, location);
-    setTimeout(function () { render(<div className={[basic].join(' ')}>Transaction completed!<Checkmark /></div>, location) }, 2000);
-    let removeNotify = () => location.parentNode.removeChild(location);
     freeze();
-    if (remove) setTimeout(removeNotify, 3000)
+    let res = await func
+    if (res) {
 
+        setTimeout(() => {
+            render(<div className={[basic].join(' ')}>Transaction completed!<Checkmark /></div>, location);
+
+        }, 3000)
+        let removeNotify = () => location.parentNode.removeChild(location);
+        setTimeout(() => {
+            removeNotify()
+            freeze(false)
+        }, 5000)
+
+
+        //let removeNotify = () => location.parentNode.removeChild(location);
+
+        return "finished"
+
+
+    };
 }
 
 export default Processing;

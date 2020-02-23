@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
 import './PaymentPage.css';
 import Processing from '../Common/Processing';
-function PaymentPage({ products, shopCart, updateShopCart }) {
+import * as APIfunction from '../../APIfunction/APIfunction'
+function PaymentPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
 
-
-    /*const [creditCard, inputcreditCard] = useState()
-    function handleChange(e) {
-        let { name, value } = e.target;
-        inputcreditCard(value)
-        e.preventDefault()
-
-    }*/
 
     return (<div className="PaymentPage">
         <h2>Transaction</h2>
         <form
             className="TransactionForm"
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
                 event.preventDefault()
-                Processing(false)
-                setTimeout(function () { window.location.href = "/completed" }, 4000)
+                let summary = {
+                    shopCart: JSON.parse(sessionStorage.getItem("shopCart")),
+                    transport: sessionStorage.getItem("method"),
+                    destination: sessionStorage.getItem("address")
+
+                }
+
+                let func = APIfunction.postPaymentRecord(summary)
+
+                let finish = await Processing(func)
+                if (finish) {
+                    setPaymentStep(5)
+                    sessionStorage.removeItem('shopCart')
+                    sessionStorage.removeItem('method')
+                    sessionStorage.removeItem('address')
+                    return setTimeout(() => props.history.push('/completed'), 5000)
+                    //setTimeout(() => { window.location.href = "/completed" }, 5000)
+                }
+
+
 
             }}>
 
@@ -33,7 +44,7 @@ function PaymentPage({ products, shopCart, updateShopCart }) {
             </input>
             <br></br>
             <label for="creditCard">Expiration Date</label>
-            <input className="" id="creditCard" type="date" required>
+            <input className="" id="creditCard" type="date" >
             </input>
             <br></br>
             <input className="btn btn-info" type="submit" value="Submit"></input>

@@ -10,11 +10,33 @@
 
 }
 .TransactionForm{
-
+position: relative;
     width:80vw;
     margin: 0 auto;
     margin-bottom: 50px;
     text-align: left;
 
 
+}
+.PaymentPage input[type=submit]{
+    display: block;
+    margin: 30px auto;
+}
+@media screen and (max-width: 330px) {
+    .PaymentPage{
+        font-size: 0.7rem;
+    }
+    .PaymentPage h2{
+        font-size: 1.5rem;
+    }
+    .PaymentPage h4{
+        font-size: 0.7rem;
+    }
+    .PaymentPage input{
+        width: 100px;
+    }
+    .PaymentPage input[type=submit]{
+        font-size: 0.7rem;
+        width: 4rem;
+    }
 }

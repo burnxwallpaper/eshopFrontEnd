@@ -22,11 +22,11 @@ function Carousel() {
                     className="carouselBtn leftCarouselBtn"
                     onClick={() => setIndex(prev => prev === 1 ? prev = 3 : prev = prev - 1)}></div>
                 <div className="carouselFrame">
-                    <div className="carouselList" style={{ transform: `translateX(-${(temp - 1) * 500}px)` }}>
+                    <div className="carouselList" style={{ transform: `translateX(-${(temp - 1) * 33.3333333}%)` }}>
 
-                        <div className="carouselItem1">1,{currentIndex}</div>
-                        <div className="carouselItem2">2,{currentIndex}</div>
-                        <div className="carouselItem3">3,{currentIndex}</div>
+                        <div className="carouselItem1"><h3>Free delivery service!</h3></div>
+                        <div className="carouselItem2"><h3>Allow return for defective products!</h3></div>
+                        <div className="carouselItem3"><h3>Coming soon!</h3></div>
 
 
                     </div>

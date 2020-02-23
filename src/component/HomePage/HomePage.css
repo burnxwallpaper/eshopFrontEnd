@@ -1,8 +1,9 @@
 .mainArea{
     position: relative;
-    top:200px;
+    top:80px;
     width:100%;
-    
+    height: 100%;
+    padding-bottom: 70px;
   }
   
   .pageNavBar{
@@ -14,10 +15,9 @@
   
   .productArea{
     position: relative;
-    width:100vw;
     min-height: 500px;
-    margin-left: 5%;
-    margin-right: 5%;
+    padding-left: 20px;
+
     left:50%;
     transform:translateX(-50%) ;
 
@@ -32,7 +32,12 @@
       margin-right: unset;
 
     }
+    .productArea{
+      padding-left: unset;
+    }
 }
+ 
+
   
   .productArea:after{
     content: "";

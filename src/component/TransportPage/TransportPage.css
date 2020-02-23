@@ -114,3 +114,27 @@ background-color: rgb(250, 230, 193);
     to{
         transform: translateY(0%) ;}
 }
+
+@media screen and (max-width: 500px) {
+    .TransportMethodForm label{
+        font-size: 1.2rem !important;
+    }
+    .TransportPage h2{
+        font-size: 1.4rem !important;
+    }
+    .TransportMethodForm h3{
+        font-size: 1.2rem !important;
+    }
+}
+
+@media screen and (max-width: 270px) {
+    .TransportMethodForm label{
+        font-size: 1rem !important;
+    }
+    .TransportPage h2{
+        font-size: 1.2rem !important;
+    }
+    .TransportMethodForm h3{
+        font-size: 1rem !important;
+    }
+}

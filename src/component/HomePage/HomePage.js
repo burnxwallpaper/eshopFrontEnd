@@ -3,11 +3,11 @@ import Product from '../Product'
 import SearchBar from '../SearchBar/SearchBar';
 import ShopCart from '../ShopCart/ShopCart'
 import Spinner from '../Common/Spinner'
+
 import './HomePage.css'
 
 function HomePage({
-    loading, setLoading, currentPage, filteredResult, displayNoResult, products, dataPerPage, pagination, shopCart, updateShopCart, searchResult, direcToPage, search, handleChange, value, setValue }) {
-    //{!displayNoResult && <div>No result</div>}
+    loading, loginStatus, setLoading, currentPage, filteredResult, displayNoResult, products, dataPerPage, pagination, shopCart, updateShopCart, searchResult, direcToPage, search, handleChange, value, setValue }) {
 
     function pageNavBar(dataPerPage) {
         let bar = []
@@ -49,9 +49,10 @@ function HomePage({
     return (
 
         <>
-
-            <SearchBar updateShopCart={updateShopCart} search={search} handleChange={handleChange} value={value} />
             <div className="mainArea">
+
+                <SearchBar updateShopCart={updateShopCart} search={search} handleChange={handleChange} value={value} />
+                <div style={{ height: "50px", top: "50px" }}>{displayNoResult && <div className="alert alert-warning" role="alert" >No result!</div>}</div>
 
                 {loading && <Spinner />}
                 <ShopCart updateShopCart={updateShopCart} shopCart={shopCart} handleChange={handleChange}

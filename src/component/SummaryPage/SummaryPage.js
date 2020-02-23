@@ -1,12 +1,15 @@
 import React from 'react';
 import './SummaryPage.css';
+import {
+    Link
+} from "react-router-dom";
 import Spinner from '../Common/Spinner';
-function SummaryPage({ products, shopCart, updateShopCart }) {
+function SummaryPage({ products, shopCart, updateShopCart, setPaymentStep }) {
     let Summary = [];
     let total = 0;
     let productsInSession = JSON.parse(sessionStorage.getItem("key"));
     let tempIndex = 0;
-    if (Object.keys(productsInSession).length > 0 && shopCart.length === 0) { updateShopCart(productsInSession) }
+    //if (Object.keys(productsInSession).length > 0 && shopCart.length === 0) { updateShopCart(productsInSession) }
     for (let [productID, quantity] of Object.entries(shopCart)) {
         let exactProduct = products.find(prod => prod._id.toString() === productID.toString())
         if (exactProduct !== undefined) {
@@ -65,7 +68,7 @@ function SummaryPage({ products, shopCart, updateShopCart }) {
 
                 </div>
             </div>
-            <button className="btn btn-info"><a href='/payment'>Confirm</a></button>
+            <button className="btn btn-info"><Link to='/payment'>Confirm</Link></button>
 
 
         </div>

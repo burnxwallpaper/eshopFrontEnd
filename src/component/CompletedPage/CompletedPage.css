@@ -1,0 +1,15 @@
+.CompletedPage{
+    position: relative;
+    width:100%;
+    height:100%;
+    top: 100px;
+}
+
+@media screen and (max-width: 330px) {
+    .CompletedPage h4{
+        font-size: 1.1rem;
+    }
+    .CompletedPage .btn-success{
+        font-size: 0.6rem;
+    }
+}

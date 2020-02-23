@@ -9,11 +9,10 @@ function Product({ product, updateShopCart }) {
 
         <div className="product" key={product._id}>
             <a href={`/product/${product._id}`}><img src={product.image} alt="" className="productImg"></img></a>
+
+            <b>Name:</b> {product.name}
             <br></br>
-            <br></br>
-            Name: {product.name}
-            <br></br>
-            Price: {product.price}
+            <b>Price:</b> ${product.price}
             <br></br>
 
             <div

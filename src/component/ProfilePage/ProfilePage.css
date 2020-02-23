@@ -6,3 +6,76 @@
 ul{
     list-style: none;
 }
+
+.buyRecordProductEach{
+    border-bottom: 1px groove black;
+    text-align: left;
+    display: grid;
+  grid-template-columns: 110px auto;
+  padding: 10px 0;
+
+}
+
+.buyRecordEach{
+    border-bottom: 1px groove black;
+    text-align: left;
+    width: 100%;
+}
+
+.buyRecordEach label{
+    word-wrap: break-word;
+    display: block;
+    width: 100%;
+}
+.buyRecordProduct{
+  /*transition: 1.5s;*/
+    height: 0;
+  overflow: hidden;
+
+  width: 100%;
+  
+}
+
+
+
+.buyRecordList{
+    margin:0 20px;
+}
+
+.buyRecordProductEach img{
+    display: block;
+    float: left;
+    width:90px;
+}
+
+#detailArrowIcon{
+    transition:0.5s;
+    margin-left:5px
+}
+
+.flowWhenSmall{
+    display: inline;
+}
+@media screen and (max-width: 315px) {
+    .flowWhenSmall{
+        display: block;
+    }
+
+}
+@media screen and (max-width: 265px) {
+    .buyRecordProductEach img{
+        display: block;
+        float: left;
+        width:75px;
+    }
+    .buyRecordProductEach{
+        grid-template-columns: 75px auto;
+        font-size: 0.5em;
+
+        
+    }
+    
+    
+    
+
+}

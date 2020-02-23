@@ -1,9 +1,13 @@
 import React from 'react';
 import './CheckOutPage.css'
 import Spinner from '../Common/Spinner'
+import {
+    Link, Switch, useRouteMatch, Route
+} from "react-router-dom";
 
 
-function CheckOutPage({ products, shopCart, updateShopCart }) {
+
+function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
     function handleChange(e) {
         let { name, value, max, min } = e.target;
         if (value > Number(max) || value < Number(min)) return
@@ -20,22 +24,19 @@ function CheckOutPage({ products, shopCart, updateShopCart }) {
 
         )
     }
+
     let Summary = []
     let total = 0
-    let productsInSession = JSON.parse(sessionStorage.getItem("key"))
-    //if (Object.keys(productsInSession).length > 0 && shopCart.length === 0) { updateShopCart(productsInSession) }
-    if (Object.keys(productsInSession).length > 0 && shopCart.length === 0) { updateShopCart(productsInSession) }
     for (let [productID, quantity] of Object.entries(shopCart)) {
         let exactProduct = products.find(prod => prod._id.toString() === productID.toString())
         if (exactProduct !== undefined) {
             total += exactProduct.price * quantity;
             Summary.push(
                 <div key={productID} className="CheckoutProduct">
-                    <br></br>
+
                     <img src={exactProduct.image} className="productImg" alt=""></img>
 
                     <div className="description">
-                        <br></br>
                         <b >Name:</b>{exactProduct.name}
                         <br></br>
                         <b >Price:</b> ${exactProduct.price}
@@ -54,16 +55,13 @@ function CheckOutPage({ products, shopCart, updateShopCart }) {
     if (total === 0) { return <Spinner /> }
     else return (
         <div className="CheckOutPage">
-
-            <h1>CheckOutPage</h1>
-            <br></br>
+            <h2>CheckOutPage</h2>
             <div className="">{Summary}</div>
 
+
+            <h2>Total:${total}</h2>
             <br></br>
-            <br></br>
-            <h2>Total <br></br>${total}</h2>
-            <br></br>
-            <a href='/transport' className="btn btn-info">Confirm</a>
+            <div onClick={setPaymentStep(2)}><Link to='/checkout/transport' className="btn btn-info">Confirm</Link></div>
 
 
         </div>

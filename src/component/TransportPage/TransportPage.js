@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import {
+    Link, withRouter, Redirect, Route
+} from "react-router-dom";
 import './TransportPage.css';
 //import Spinner from '../Common/Spinner';
 
-function TransportPage({ products, shopCart, updateShopCart }) {
+function TransportPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
 
     const [address, inputAddress] = useState()
     const [checkedValue, updateValue] = useState()
@@ -10,7 +13,7 @@ function TransportPage({ products, shopCart, updateShopCart }) {
 
 
     function handleChange(e) {
-        let { name, value } = e.target;
+        let { value } = e.target;
         inputAddress(value)
         e.preventDefault()
     }
@@ -34,10 +37,11 @@ function TransportPage({ products, shopCart, updateShopCart }) {
             sessionStorage.setItem("method", "Self Pick Up");
             sessionStorage.setItem("address", checkedValue)
         }
-
-        window.location.href = "/confirm";
-
+        setPaymentStep(3)
         e.preventDefault()
+        //return <Route path={{ pathname: "/confirm" }} />
+        return props.history.push('/confirm')
+
 
     }
 

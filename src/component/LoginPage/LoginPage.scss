@@ -126,3 +126,21 @@
     }
   }
 }
+
+.wrongAuth{
+  color:rgb(156, 7, 7);
+  animation: changeColor 0.8s forwards;
+}
+
+@keyframes changeColor{
+  0%{
+    color: rgb(241, 207, 207);
+    text-shadow: #f8f4f4;
+
+    
+  }
+  100%{
+    
+    color:rgb(245, 51, 51);
+  }
+}

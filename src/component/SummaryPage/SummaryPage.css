@@ -1,10 +1,16 @@
 .SummaryPage{
     position: relative;
-    top: 100px;
+    top: 70px;
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 70px;
 }
 
+@media screen and (max-width: 768px) {
+    .SummaryPage {
+        padding-bottom: unset;
+    }
+  }
 
 
 .SummaryTable{
@@ -37,14 +43,14 @@
 
 .SummaryProduct{
     display: grid;
-    grid-template-columns: 20% 120px 40% 30%;
+    grid-template-columns: 15% 120px 40% auto;
     grid-template-rows: 0 150px;
 }
 
 
 .SummaryProduct .tempIndex{
     font-family: Arial, Helvetica, sans-serif;
-    z-index: 2;
+    z-index: 1;
     font-size: 2rem;
     border-radius: 50%;
     border:1px groove rgb(126, 119, 119) ;
@@ -103,9 +109,12 @@
         font-size: 1rem;
         
     }
+    .descriptionSum{
+        display: none;
+    }
     .SummaryProduct{
         display: grid;
-        grid-template-columns: 20% 120px 80% ;
+        grid-template-columns: 20% 120px auto ;
 
     }    
 

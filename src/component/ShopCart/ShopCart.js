@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 import './shopCart.css'
 
 function ShopCart({ shopCart, updateShopCart, products }) {
@@ -9,21 +9,9 @@ function ShopCart({ shopCart, updateShopCart, products }) {
         //value = Math.max(Number(min), Math.min(Number(max), Number(value)));
         updateShopCart(prev => ({ ...prev, [name]: value }))
         e.preventDefault()
-
     }
-
-    /*function changeQuantity(add, product) {
-        updateShopCart(
-            prevState => ({
-                ...prevState,
-                [product]: add ? prevState[product] + 1 :
-                    //max=0
-                    (prevState[product] - 1 > 1 ? prevState[product] - 1 : 1)
-            }))
-    }*/
     function deleteProduct(product) {
         if (product === "all") {
-
             updateShopCart(prev => prev.length =
                 0)
             return;
@@ -38,10 +26,8 @@ function ShopCart({ shopCart, updateShopCart, products }) {
     let Summary = []
     let total = 0
     let productsInSession = JSON.parse(sessionStorage.getItem("key"))
-
+    //get session storage for shop cart items
     //if (productsInSession ? (Object.keys(productsInSession).length > 0 && shopCart.length === 0) : false) { updateShopCart(productsInSession) }
-    if (productsInSession ? (Object.keys(productsInSession).length > 0 && shopCart.length === 0) : false) { updateShopCart(productsInSession) }
-
     if (shopCart.length !== 0) {
         for (let [productID, quantity] of Object.entries(shopCart)) {
             let exactProduct = products.find(prod => prod._id.toString() === productID.toString())
@@ -49,7 +35,7 @@ function ShopCart({ shopCart, updateShopCart, products }) {
                 total += exactProduct ? exactProduct.price * quantity : "NULL";
 
                 Summary.push(
-                    <div key={productID}>
+                    <div className="shopCartSummaryProduct" key={productID}>
 
 
                         <b >Name:</b>{exactProduct.name}
@@ -74,9 +60,15 @@ function ShopCart({ shopCart, updateShopCart, products }) {
     }
     if (Summary.length === 0) {
         Summary.push(
-            <div key="empty">
-                <br></br>
+            <div key="empty"
+                className="alert alert-warning"
+                style={{
+                    textAlign: "center",
+                    marginBottom: "unset"
+
+                }}>
                 It is empty!
+
             </div>
         )
     }
@@ -87,13 +79,14 @@ function ShopCart({ shopCart, updateShopCart, products }) {
 
             <div className="shopCartArea">
 
-
+                <i class="fas fa-shopping-cart"></i>
 
                 <div className="shopCart">
                     <h3>Shop Cart</h3>
                     <button
                         className="btn btn-light"
                         onClick={() => deleteProduct("all")}>Clear all</button>
+
                     <div className="shopCartList">
 
                         {Summary}
@@ -103,7 +96,7 @@ function ShopCart({ shopCart, updateShopCart, products }) {
                     {(total !== 0) && (<div className="shopCartSummary">
                         <h4>Total <br></br>${total}</h4>
 
-                        {total !== 0 && (<div className="checkOut"><h4><a href="/checkout">Checkout</a></h4></div>)}
+                        {total !== 0 && (<div className="checkOut"><h4><Link to="/checkout">Checkout</Link></h4></div>)}
                     </div>)}
                 </div>
             </div>
