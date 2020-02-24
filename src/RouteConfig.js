@@ -1,22 +1,25 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import Loadable from 'react-loadable';
+import Spinner from './component/Common/Spinner'
 import Header from './component/navbar/Header';
 import Footer from './component/Footer/Footer';
 import HomePage from './component/HomePage/HomePage';
-import ContactPage from './ContactPage/ContactPage';
-import CheckOutPage from './component/CheckOutPage/CheckOutPage';
-import SummaryPage from './component/SummaryPage/SummaryPage'
-import TransportPage from './component/TransportPage/TransportPage'
-import PaymentPage from './component/PaymentPage/PaymentPage'
-import PageNotFound from './component/PageNotFound';
-import LoginPage from './component/LoginPage/LoginPage';
-import ProfilePage from './component/ProfilePage/ProfilePage';
 import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
-import Carousel from './component/PromotionPage/Carousel';
-import * as APIfunction from './APIfunction/APIfunction'
-import CompletedPage from './component/CompletedPage/CompletedPage'
-import SuccessNotify from './component/Common/SuccessNotify'
+//import ContactPage from './ContactPage/ContactPage';
+//import CheckOutPage from './component/CheckOutPage/CheckOutPage';
+//import SummaryPage from './component/SummaryPage/SummaryPage'
+//import TransportPage from './component/TransportPage/TransportPage'
+//import PaymentPage from './component/PaymentPage/PaymentPage'
+//import PageNotFound from './component/PageNotFound';
+//import LoginPage from './component/LoginPage/LoginPage';
+//import ProfilePage from './component/ProfilePage/ProfilePage';
+//import Carousel from './component/PromotionPage/Carousel';
+//import CompletedPage from './component/CompletedPage/CompletedPage'
+//useless
+//import * as APIfunction from './APIfunction/APIfunction'
+//import SuccessNotify from './component/Common/SuccessNotify'  
 
 function RouteCongig({
     dataPerPage, filteredResult, pagination, direcToPage, currentPage, searchResult, shopCart, updateShopCart, search, handleChange,
@@ -45,6 +48,48 @@ function RouteCongig({
 
         />
     }
+    const LoadableContactPage = Loadable({
+        loader: () => import('./ContactPage/ContactPage'),
+        loading: Spinner,
+      });
+      const LoadablePromotionPage = Loadable({
+        loader: () => import('./component/PromotionPage/Carousel'),
+        loading: Spinner,
+      });
+      const LoadableLoginPage = Loadable({
+        loader: () => import('./component/LoginPage/LoginPage'),
+        loading: Spinner,
+      });
+      const LoadableProfilePage = Loadable({
+        loader: () => import('./component/ProfilePage/ProfilePage'),
+        loading: Spinner,
+      });
+      const LoadableCheckOutPage = Loadable({
+        loader: () => import('./component/CheckOutPage/CheckOutPage'),
+        loading: Spinner,
+      });
+      const LoadableSummaryPage = Loadable({
+        loader: () => import('./component/SummaryPage/SummaryPage'),
+        loading: Spinner,
+      });
+      const LoadableTransportPage = Loadable({
+        loader: () => import('./component/TransportPage/TransportPage'),
+        loading: Spinner,
+      });
+      const LoadablePaymentPage = Loadable({
+        loader: () => import('./component/PaymentPage/PaymentPage'),
+        loading: Spinner,
+      });
+      const LoadablePageNotFound = Loadable({
+        loader: () => import('./component/PageNotFound'),
+        loading: Spinner,
+      });
+      const LoadableCompletedPage= Loadable({
+        loader: () => import('./component/CompletedPage/CompletedPage'),
+        loading: Spinner,
+      });
+      
+
     return (
         <>
         <div className="App">
@@ -54,9 +99,9 @@ function RouteCongig({
                 <Route exact path="/" render={() => returnHomePage()}
                 />
 
-                <Route path="/contact" component={ContactPage} />
+                <Route path="/contact" component={LoadableContactPage} />
 
-                <Route path="/promotion" component={Carousel} />
+                <Route path="/promotion" component={LoadablePromotionPage} />
                 <Route path="/product/:slug" render={(props) =>
                     <ProductInfoPage
 
@@ -78,7 +123,7 @@ function RouteCongig({
 
                             }}
                         /> :
-                        <LoginPage
+                        <LoadableLoginPage
                             {...props}
                             loginStatus={loginStatus}
                             setLogin={setLogin}
@@ -89,12 +134,12 @@ function RouteCongig({
                 {/*redirect to login if no login*/}
                 {(!loginStatus) && <Redirect to={{pathname: "/login",}}/>}
 
-                <Route path="/profile" render={() =><ProfilePage/>} />
+                <Route path="/profile" render={() =><LoadableProfilePage/>} />
 
                 {/*redirect to homepage for empty shopcart*/}             
                 <Route  exact path="/checkout" render={(props) =>
                 sessionStorage.getItem("shopCart")?
-                    <CheckOutPage
+                    <LoadableCheckOutPage
                         {...props}
                         products={searchResult}
                         shopCart={shopCart}
@@ -104,7 +149,7 @@ function RouteCongig({
                     />:<Redirect to={{pathname: "/"}}/>} />
                 <Route path="/checkout/transport" render={(props) =>
                 sessionStorage.getItem("shopCart")?
-                    <TransportPage
+                    <LoadableTransportPage
                             {...props}
                             setPaymentStep={setPaymentStep}
                 />:<Redirect to={{pathname: "/"}}/> } />
@@ -113,7 +158,7 @@ function RouteCongig({
               
                 <Route path="/confirm" render={(props) =>
             sessionStorage.getItem("shopCart")&&sessionStorage.getItem("method")&&sessionStorage.getItem("address")?
-                        <SummaryPage
+                        <LoadableSummaryPage
                             {...props}
                             products={searchResult}
                             shopCart={shopCart}
@@ -126,7 +171,7 @@ function RouteCongig({
                
                 <Route path="/payment" render={(props) =>
 sessionStorage.getItem("shopCart")&&sessionStorage.getItem("method")&&sessionStorage.getItem("address")?
-                    <PaymentPage
+                    <LoadablePaymentPage
                         {...props}
                         shopCart={shopCart}
                         setPaymentStep={setPaymentStep}
@@ -134,13 +179,13 @@ sessionStorage.getItem("shopCart")&&sessionStorage.getItem("method")&&sessionSto
                 } />
                 <Route path="/completed" render={(props) =>
                 paymentStep > 4 ?
-                    <CompletedPage
+                    <LoadableCompletedPage
                         {...props}
                         setPaymentStep={setPaymentStep}
                     />:
                     <Redirect to={{pathname: "/checkout",}}/>
                 } />
-                <Route component={PageNotFound} />
+                <Route component={LoadablePageNotFound} />
             </Switch>
             
 

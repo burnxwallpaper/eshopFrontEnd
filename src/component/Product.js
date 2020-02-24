@@ -1,6 +1,9 @@
 import React from 'react';
 import './Product.css'
 import SuccessNotify from './Common/SuccessNotify'
+import {
+    Link
+} from "react-router-dom";
 
 
 
@@ -8,7 +11,7 @@ function Product({ product, updateShopCart }) {
     return (
 
         <div className="product" key={product._id}>
-            <a href={`/product/${product._id}`}><img src={product.image} alt="" className="productImg"></img></a>
+            <Link to={`/product/${product._id}`}><img src={product.image} alt="" className="productImg"></img></Link>
 
             <b>Name:</b> {product.name}
             <br></br>

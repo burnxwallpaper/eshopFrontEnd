@@ -35,6 +35,7 @@ function LoginPage({ setLogin }) {
             }}>
 
                 <span id="loginLabel">Login</span>
+                <span className="tooltipac" title="username+pw= aaa+aaa or bbb+bbb" >Test account info</span>
                 <div className="form-field">
                     <i className="fas fa-user"></i>
                     <input type="text" name="username" id="username" className="form-field" pattern="^[a-zA-Z0-9_-]{1,16}$" placeholder=" " required></input>

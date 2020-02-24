@@ -4,7 +4,13 @@
     width: 100%;
 }
 
-
+.productInfoContainer{
+    display: flex;
+    justify-content: center;
+}
+.productDescriptionArea{
+    margin-left:30px;
+}
 
 .productInfoImgArea{
     float: left;
@@ -47,6 +53,9 @@
 
 
 @media screen and (max-width: 510px) {
+.productInfoContainer{
+    display: block;
+}
     .productInfoImgArea{
         float: unset;
         margin-right: unset;
@@ -68,8 +77,8 @@
     .productDescriptionArea{
         position: relative;
         top:460px;
-        left:5%;
         width:95%;
+        margin-left: 15px;
 
     }
 

@@ -2,22 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Header from './component/navbar/Header';
-import HomePage from './component/HomePage/HomePage';
-import ContactPage from './ContactPage/ContactPage';
-import CheckOutPage from './component/CheckOutPage/CheckOutPage';
-import SummaryPage from './component/SummaryPage/SummaryPage'
-import TransportPage from './component/TransportPage/TransportPage'
-import PaymentPage from './component/PaymentPage/PaymentPage'
-import PageNotFound from './component/PageNotFound';
-import LoginPage from './component/LoginPage/LoginPage';
-import ProfilePage from './component/ProfilePage/ProfilePage';
-import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
-import Carousel from './component/PromotionPage/Carousel';
 import * as APIfunction from './APIfunction/APIfunction'
-import CompletedPage from './component/CompletedPage/CompletedPage'
-import SuccessNotify from './component/Common/SuccessNotify'
 import RouteConfig from './RouteConfig'
+
 
 function App() {
 
