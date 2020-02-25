@@ -74,6 +74,7 @@ export function updateRecord(record) {
 export function login(account) {
     return fetch(URL + "/authentication/account", {
         method: "POST",
+        mode: 'cors',
         headers: { "content-type": "application/json" },
         body: JSON.stringify(account)
     })

@@ -5,6 +5,7 @@ import LoginValid from './LoginValid'
 import SuccessNotify from '../Common/SuccessNotify'
 
 
+
 function LoginPage({ setLogin }) {
     const [loginFail, setLoginFail] = useState()
 
@@ -19,6 +20,7 @@ function LoginPage({ setLogin }) {
             <form className="login-form" onSubmit={async (e) => {
                 let res = await LoginValid(e)
                 if (res) {
+
                     setLogin(true)
                     //setLoginFail(false)
                     SuccessNotify("Wellcome back, " + res + "!")
@@ -35,6 +37,7 @@ function LoginPage({ setLogin }) {
             }}>
 
                 <span id="loginLabel">Login</span>
+                <span id="loadingLogin"></span>
                 <span className="tooltipac" title="username+pw= aaa+aaa or bbb+bbb" >Test account info</span>
                 <div className="form-field">
                     <i className="fas fa-user"></i>

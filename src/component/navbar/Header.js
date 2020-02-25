@@ -59,7 +59,7 @@ function Header({ loginStatus, setLogin, updateShopCart }) {
                       sessionStorage.removeItem('shopCart')
                       sessionStorage.removeItem('method')
                       sessionStorage.removeItem('address')
-                      updateShopCart(prev => prev === 0 ? "empty" : prev.length = 0)
+                      updateShopCart(prev => prev === 0 ? ["empty"] : prev.length = 0)
                       document.cookie = 'token=; Max-Age=-99999999;'
 
                       setLogin(false)

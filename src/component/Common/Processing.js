@@ -15,12 +15,22 @@ async function Processing(func, words = "Processing...") {
     freeze();
     let res = await func
     if (res) {
+        let removeNotify = () => location.parentNode.removeChild(location);
+        /*if (forlogin) {
+            render(<div className={[basic].join(' ')}>Transaction completed!<Checkmark /></div>, location);
+            setTimeout(() => {
+                freeze(false)
+                removeNotify()
 
+            }, 1000)
+
+            return res
+
+        }*/
         setTimeout(() => {
             render(<div className={[basic].join(' ')}>Transaction completed!<Checkmark /></div>, location);
 
         }, 3000)
-        let removeNotify = () => location.parentNode.removeChild(location);
         setTimeout(() => {
             removeNotify()
             freeze(false)
