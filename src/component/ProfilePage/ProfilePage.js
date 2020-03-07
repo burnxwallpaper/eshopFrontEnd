@@ -68,7 +68,7 @@ function ProfilePage() {
                         <div>
                             <b>Detail:</b>
                             <i id={`detailArrowIcon${recordIndex}`} class="fas fa-chevron-circle-right"></i>
-                            <div id={`arrow${recordIndex}`} className="doubleArrow"> <i class="fas fa-angle-double-up"></i></div>
+                            <div id={`arrow${recordIndex}`} className="doubleArrow"> <i className="fas fa-angle-double-up"></i></div>
                         </div>
 
 

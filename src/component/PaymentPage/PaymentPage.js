@@ -34,7 +34,7 @@ function PaymentPage({ products, shopCart, updateShopCart, setPaymentStep, ...pr
             }}>
 
             <div className="orderheader"><h4>Please fill in your credit card information</h4></div>
-            <label for="creditCard"> Card No. (Three Digits for testing)</label>
+            <label htmlFor="creditCard"> Card No. (Three Digits for testing)</label>
             <input className="" id="creditCard" pattern="[0-9]{3}" type="tel" maxLength="3" required>
             </input>
             <br></br>
