@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import * as APIfunction from './APIfunction/APIfunction'
 import RouteConfig from './RouteConfig'
@@ -22,33 +21,45 @@ function App() {
   useEffect(() => {
     if (shopCart.length === 0) return;
     sessionStorage.setItem("shopCart", JSON.stringify(shopCart));
-    console.log("session saved")
+    console.log("shopCart saved in session")
   }, [shopCart])
+  //retrieve shopCart saved in session
   if (sessionStorage.getItem("shopCart") && shopCart.length === 0) {
+    console.log("retrieve shopCart saved in session")
     updateShopCart(JSON.parse(sessionStorage.getItem("shopCart")))
   }
   //reamin login even refresh page
-  if (sessionStorage.getItem("username") && loginStatus === false) { setLogin(true) }
-  //first time load check auto login
-  if (APIfunction.getCookie("token")) {
-    (async () => {
-      let account = await APIfunction.autoLogin()
-      if (account) {
-        sessionStorage.setItem("username", account.username);
-        setLogin(true)
-      }
-    })()
+  if (sessionStorage.getItem("username") && loginStatus === false) {
+    console.log("retrieve login status from session storage")
+    setLogin(true)
   }
+  //first time load check auto login
+  useEffect(() => {
+    if (APIfunction.getCookie("token")) {
+      (async () => {
+        let account = await APIfunction.autoLogin()
+        if (account) {
+          sessionStorage.setItem("username", account.username);
+          console.log("auto login success")
+          setLogin(true)
+        } else { console.log("invalid token,auto login fail") }
+      })()
+    } else { console.log("token not found,auto login fail") }
+  }, [])
   //load productlist after loading
-  async function getProducts() {
-    let productlist;
-    if (loading) {
+  useEffect(() => {
+    async function getProducts() {
+      let productlist;
+
       productlist = await APIfunction.getRecord().then(products => { return products });
       if (productlist) { setLoading(false) }
       searching(productlist)
+      console.log("productlist get")
+
     }
-  }
-  getProducts()
+    getProducts()
+  }, [])
+
   // check rerender
   console.log("rerender")
 
@@ -83,6 +94,7 @@ function App() {
         tempData.push(item);
       }
     });
+
     return tempData
   }
 

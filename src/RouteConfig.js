@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Spinner from './component/Common/Spinner'

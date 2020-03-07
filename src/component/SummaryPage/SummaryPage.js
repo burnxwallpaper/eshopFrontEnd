@@ -1,15 +1,11 @@
 import React from 'react';
 import './SummaryPage.css';
-import {
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Spinner from '../Common/Spinner';
-function SummaryPage({ products, shopCart, updateShopCart, setPaymentStep }) {
+function SummaryPage({ products, shopCart }) {
     let Summary = [];
     let total = 0;
-    let productsInSession = JSON.parse(sessionStorage.getItem("key"));
     let tempIndex = 0;
-    //if (Object.keys(productsInSession).length > 0 && shopCart.length === 0) { updateShopCart(productsInSession) }
     for (let [productID, quantity] of Object.entries(shopCart)) {
         let exactProduct = products.find(prod => prod._id.toString() === productID.toString())
         if (exactProduct !== undefined) {
@@ -62,9 +58,9 @@ function SummaryPage({ products, shopCart, updateShopCart, setPaymentStep }) {
 
                 <br></br>
                 <div className="orderTransport">
-                    <h4><i class="fas fa-truck"></i>&nbsp;Pick Up Method:</h4><p>{sessionStorage.getItem("method")}</p>
+                    <h4><i className="fas fa-truck"></i>&nbsp;Pick Up Method:</h4><p>{sessionStorage.getItem("method")}</p>
 
-                    <h4><i class="fas fa-map-marked-alt"></i>&nbsp;Address:</h4><p>{sessionStorage.getItem("address")}</p>
+                    <h4><i className="fas fa-map-marked-alt"></i>&nbsp;Address:</h4><p>{sessionStorage.getItem("address")}</p>
 
                 </div>
             </div>

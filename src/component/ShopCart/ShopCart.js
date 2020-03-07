@@ -6,7 +6,6 @@ function ShopCart({ shopCart, updateShopCart, products }) {
     function handleChange(e) {
         let { name, value, max, min } = e.target;
         if (value > Number(max) || value < Number(min)) return
-        //value = Math.max(Number(min), Math.min(Number(max), Number(value)));
         updateShopCart(prev => ({ ...prev, [name]: value }))
         e.preventDefault()
     }
@@ -25,9 +24,7 @@ function ShopCart({ shopCart, updateShopCart, products }) {
 
     let Summary = []
     let total = 0
-    let productsInSession = JSON.parse(sessionStorage.getItem("key"))
-    //get session storage for shop cart items
-    //if (productsInSession ? (Object.keys(productsInSession).length > 0 && shopCart.length === 0) : false) { updateShopCart(productsInSession) }
+
     if (shopCart.length !== 0) {
         for (let [productID, quantity] of Object.entries(shopCart)) {
             let exactProduct = products.find(prod => prod._id.toString() === productID.toString())
@@ -75,23 +72,19 @@ function ShopCart({ shopCart, updateShopCart, products }) {
     return (
         <>
             <input className="shopCartCheckbox" id="shopCartCheckbox" type="checkbox"></input>
-            <label className="shopCartCheckboxlabel" htmlFor="shopCartCheckbox"><i class="fas fa-shopping-cart"></i></label>
+            <label className="shopCartCheckboxlabel" htmlFor="shopCartCheckbox"><i className="fas fa-shopping-cart"></i></label>
 
             <div className="shopCartArea">
 
-                <i class="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart"></i>
 
                 <div className="shopCart">
                     <h3>Shop Cart</h3>
                     <button
                         className="btn btn-light"
                         onClick={() => deleteProduct("all")}>Clear all</button>
-
                     <div className="shopCartList">
-
                         {Summary}
-
-
                     </div>
                     {(total !== 0) && (<div className="shopCartSummary">
                         <h4>Total <br></br>${total}</h4>

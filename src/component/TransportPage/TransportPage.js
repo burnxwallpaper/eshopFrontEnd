@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import {
-    Link, withRouter, Redirect, Route
-} from "react-router-dom";
 import './TransportPage.css';
-//import Spinner from '../Common/Spinner';
 
 function TransportPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
 
@@ -39,10 +35,7 @@ function TransportPage({ products, shopCart, updateShopCart, setPaymentStep, ...
         }
         setPaymentStep(3)
         e.preventDefault()
-        //return <Route path={{ pathname: "/confirm" }} />
         return props.history.push('/confirm')
-
-
     }
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PaymentPage.css';
 import Processing from '../Common/Processing';
 import * as APIfunction from '../../APIfunction/APIfunction'
@@ -27,7 +27,6 @@ function PaymentPage({ products, shopCart, updateShopCart, setPaymentStep, ...pr
                     sessionStorage.removeItem('method')
                     sessionStorage.removeItem('address')
                     return setTimeout(() => props.history.push('/completed'), 5000)
-                    //setTimeout(() => { window.location.href = "/completed" }, 5000)
                 }
 
 

@@ -9,13 +9,12 @@ import mockDescription from './mockDescription'
 function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, value, setValue, loading, setLoading }) {
 
     if (!loading && products.length === 0) { setLoading(true) } else if (loading && products.length > 0) { setLoading(false) }
+    //get product after loading productlist
     if (!loading && products.length > 0) {
         let productID = window.location.pathname.substring(9)
         !value && setValue(1)
         let exactProduct = products.find(product => product._id.toString() === productID.toString())
 
-
-        //product = { abd: 1 }
         return (
             <>
                 <ShopCart updateShopCart={updateShopCart} shopCart={shopCart} MockData={Mockdata} products={products} />
@@ -28,12 +27,11 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                             <ul>
                                 <li><h3>Name:{exactProduct.name}</h3></li>
                                 <li><h3>Price:${exactProduct.price}</h3></li>
-                                <li><h3></h3></li>
                                 <li><h3>Quantity:
                                     <div >
-                                        <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = (prev > 1 ? prev - 1 : 1))}><i class="fas fa-minus-square"></i></div>
+                                        <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = (prev > 1 ? prev - 1 : 1))}><i className="fas fa-minus-square"></i></div>
                                         <input value={value} onChange={handleChange} ></input>
-                                        <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = prev + 1)}><i class="fas fa-plus-square"></i></div>
+                                        <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = prev + 1)}><i className="fas fa-plus-square"></i></div>
                                     </div>
                                 </h3>
                                 </li>
@@ -45,7 +43,6 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                         updateShopCart(
                                             prevState => ({
                                                 ...prevState,
-                                                //id:quantity
                                                 [exactProduct._id]: value
                                             }))
                                     }
@@ -57,7 +54,6 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                             onClick={() => updateShopCart(
                                                 prevState => ({
                                                     ...prevState,
-                                                    //id:quantity
                                                     [exactProduct._id]: value
                                                 }))}>Buy Now
                                 </div></a>

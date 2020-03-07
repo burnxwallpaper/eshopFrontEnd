@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Product from '../Product'
 import SearchBar from '../SearchBar/SearchBar';
 import ShopCart from '../ShopCart/ShopCart'
 import Spinner from '../Common/Spinner'
-
 import './HomePage.css'
 
+
 function HomePage({
-    loading, loginStatus, setLoading, currentPage, filteredResult, displayNoResult, products, dataPerPage, pagination, shopCart, updateShopCart, searchResult, direcToPage, search, handleChange, value, setValue }) {
+    loading, currentPage, filteredResult, displayNoResult, products, dataPerPage, pagination, shopCart, updateShopCart, searchResult, direcToPage, search, handleChange, value, setValue }) {
 
     function pageNavBar(dataPerPage) {
         let bar = []
@@ -16,7 +16,6 @@ function HomePage({
             bar.push(<button key={`page${i}`} className="pageNavButton"
                 style={{
                     backgroundColor: `${currentPage === i ? "rgb(158, 227, 248)" : "white"}`
-                    //color: `${currentPage === i ? "white" : "black"}`
                 }}
                 onClick={() => {
                     direcToPage(i);
@@ -25,7 +24,7 @@ function HomePage({
                 }
                 }> {i}</button >)
         }
-        //let PageBtnStyle = (currentPage === 1 ? "visibility:hidden" : "visibility:visible")
+
         bar.unshift(
             <button key="prevPage" className="pageNavButton"
                 style={{ visibility: `${currentPage === 1 ? "hidden" : "visible"}` }}

@@ -1,17 +1,14 @@
 import React from 'react';
 import './CheckOutPage.css'
 import Spinner from '../Common/Spinner'
-import {
-    Link, Switch, useRouteMatch, Route
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
-function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
+function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep }) {
     function handleChange(e) {
         let { name, value, max, min } = e.target;
         if (value > Number(max) || value < Number(min)) return
-        //value = Math.max(Number(min), Math.min(Number(max), Number(value)));
         updateShopCart(prev => ({ ...prev, [name]: value }))
         e.preventDefault()
 

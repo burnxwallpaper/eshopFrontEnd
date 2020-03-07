@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CompletedPage.css';
 import { Link } from 'react-router-dom';
-function CompletedPage({ products, shopCart, updateShopCart }) {
-    console.log(window.location.hostname)
-    console.log(window.history)
-    //if (document.referrer !== window.location.hostname + "/payment") return window.location.href = "/"
+
+function CompletedPage() {
     return (
         <div className="CompletedPage">
-
             <div className="alert alert-success" role="alert">
                 <h4 class="alert-heading">Your transaction is completed!</h4>
                 <hr>
@@ -15,12 +12,6 @@ function CompletedPage({ products, shopCart, updateShopCart }) {
                 <div style={{ margin: "10px 10px" }} className="btn btn-success"><Link to="/profile">Record</Link></div>
                 <div style={{ margin: "10px 10px" }} className="btn btn-success"><Link to="/">Shopping</Link></div>
             </div>
-
-
-
-
-
-
         </div>)
 
 }

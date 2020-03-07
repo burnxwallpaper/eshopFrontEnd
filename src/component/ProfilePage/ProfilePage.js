@@ -9,19 +9,14 @@ function ProfilePage() {
     const [temp, setTemp] = useState();
     let res
     (async () => {
-
         res = await APIfunction.getPaymentRecord()
         if (!temp) {
-
             setTemp(res)
             console.log(res)
         }
-
-
-
     })()
     let summary = []
-
+    //expand div children size function 
     function growDiv(index) {
         console.log("growing")
         let growDiv = document.getElementById("buyRecordProduct" + index);
@@ -38,7 +33,6 @@ function ProfilePage() {
         } else {
             growDiv.style.height = growDiv.scrollHeight + 'px';
             arrow.classList.add("doubleArrowDisplay")
-            //growDiv.style.overflow = "scroll"
             if (growDiv.scrollHeight < 300) { growDiv.style.transition = "0.7s" }
         }
     }
@@ -53,7 +47,7 @@ function ProfilePage() {
                 total += sum;
                 products.push(
                     <div key={`buyRecordProduct${prodIndex}`} className="buyRecordProductEach">
-                        <img src={product.image} ></img>
+                        <img alt={product.name} src={product.image} ></img>
                         <div><div><b>Name:</b>{product.name}</div>
                             <div><b>Price:</b>${product.price}</div>
                             <div><b>Quantity:</b>{product.quantity}</div>
@@ -96,9 +90,6 @@ function ProfilePage() {
 
                     <div
                         id={`buyRecordProduct${recordIndex}`} className="buyRecordProduct">{products}</div>
-
-
-
 
                 </div >
 
