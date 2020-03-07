@@ -31,9 +31,6 @@ ul{
   /*transition: 1.5s;*/
     height: 0;
   overflow: hidden;
-
-  width: 100%;
-  
 }
 
 
@@ -56,6 +53,19 @@ ul{
 .flowWhenSmall{
     display: inline;
 }
+
+.doubleArrow{
+    display: none;
+    cursor: pointer;
+    float: right;
+    font-size: 25px;
+    transform: translate(-10px,-10px)
+}
+.doubleArrowDisplay{
+    cursor: pointer;
+ display: block;
+}
+
 @media screen and (max-width: 315px) {
     .flowWhenSmall{
         display: block;
@@ -79,3 +89,4 @@ ul{
     
 
 }
+

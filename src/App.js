@@ -8,14 +8,28 @@ import RouteConfig from './RouteConfig'
 
 function App() {
 
-  let productlist;
   const [loading, setLoading] = useState(true);
-
   const [searchResult, searching] = useState([])
   const [filteredResult, filter] = useState([])
   const [paymentStep, setPaymentStep] = useState([])
   const [loginStatus, setLogin] = useState(false)
+  const [shopCart, updateShopCart] = useState([]);
+  const [value, setValue] = useState()
+  const [displayNoResult, noResult] = useState(false)
+  const [currentPage, direcToPage] = useState(1)
+
+  //remain shopcart status even refresh page & add to session storage when updated
+  useEffect(() => {
+    if (shopCart.length === 0) return;
+    sessionStorage.setItem("shopCart", JSON.stringify(shopCart));
+    console.log("session saved")
+  }, [shopCart])
+  if (sessionStorage.getItem("shopCart") && shopCart.length === 0) {
+    updateShopCart(JSON.parse(sessionStorage.getItem("shopCart")))
+  }
+  //reamin login even refresh page
   if (sessionStorage.getItem("username") && loginStatus === false) { setLogin(true) }
+  //first time load check auto login
   if (APIfunction.getCookie("token")) {
     (async () => {
       let account = await APIfunction.autoLogin()
@@ -25,7 +39,9 @@ function App() {
       }
     })()
   }
+  //load productlist after loading
   async function getProducts() {
+    let productlist;
     if (loading) {
       productlist = await APIfunction.getRecord().then(products => { return products });
       if (productlist) { setLoading(false) }
@@ -33,21 +49,12 @@ function App() {
     }
   }
   getProducts()
+  // check rerender
   console.log("rerender")
-  const [shopCart, updateShopCart] = useState([]);
-  const [value, setValue] = useState()
-  const [displayNoResult, noResult] = useState(false)
-  const [currentPage, direcToPage] = useState(1)
 
-  useEffect(() => {
-    if (shopCart.length === 0) return;
-    sessionStorage.setItem("shopCart", JSON.stringify(shopCart));
-    console.log("session saved")
-  }, [shopCart])
-  if (sessionStorage.getItem("shopCart") && shopCart.length === 0) {
-    updateShopCart(JSON.parse(sessionStorage.getItem("shopCart")))
-  }
 
+
+  //change quantity
   function handleChange(e) {
     let temp = e.target.value;
     setValue(temp)
@@ -55,6 +62,7 @@ function App() {
 
   }
 
+  //search bar function
   function search(e) {
     let result = searchResult.filter(product => product.name.includes(value.toLowerCase()));
     result.length > 0 ? noResult(false) : noResult(true);
@@ -62,6 +70,8 @@ function App() {
     direcToPage(1);
     e.preventDefault();
   }
+
+  //pagination based on filtered result
   function pagination(dataPerPage = 8) {
 
     const minData = (currentPage * dataPerPage) - dataPerPage + 1;
@@ -75,9 +85,9 @@ function App() {
     });
     return tempData
   }
-  /*let returnHomePage = function (props) {
-    return <HomePage
-      {...props}
+
+  return (
+    <RouteConfig
       dataPerPage={8}
       filteredResult={filteredResult}
       pagination={pagination}
@@ -94,101 +104,12 @@ function App() {
       setValue={setValue}
       loading={loading}
       setLoading={setLoading}
+      setLogin={setLogin}
       loginStatus={loginStatus}
-
-    />
-  }*/
-
-  return (<RouteConfig dataPerPage={8}
-    filteredResult={filteredResult}
-    pagination={pagination}
-    direcToPage={direcToPage}
-    currentPage={currentPage}
-    searchResult={searchResult}
-    shopCart={shopCart}
-    updateShopCart={updateShopCart}
-    search={search}
-    handleChange={handleChange}
-    displayNoResult={displayNoResult}
-    products={searchResult}
-    value={value}
-    setValue={setValue}
-    loading={loading}
-    setLoading={setLoading}
-    setLogin={setLogin}
-    loginStatus={loginStatus}
-    paymentStep={paymentStep}
-    setPaymentStep={setPaymentStep} />)
+      paymentStep={paymentStep}
+      setPaymentStep={setPaymentStep} />)
 }
 
-/*return (
-  <div className="App">
-    <Header />
-    <div id="toastBar"></div>
-    <Switch>
-      <Route exact path="/" render={(props) => returnHomePage()}
-      />
 
-      <Route path="/contact" component={ContactPage} />
-      <Route path="/checkout" render={(props) =>
-        <CheckOutPage
-          {...props}
-          products={searchResult}
-          shopCart={shopCart}
-          updateShopCart={updateShopCart}
-
-        />} />
-
-      <Route path="/login" render={(props) =>
-        <LoginPage
-          {...props}
-          loginStatus={loginStatus}
-          setLogin={setLogin}
-
-        />} />
-      <Route path="/profile" component={ProfilePage} />
-      <Route path="/promotion" component={Carousel} />
-      <Route path="/product/:slug" render={(props) =>
-        <ProductInfoPage
-
-          {...props}
-          shopCart={shopCart}
-          updateShopCart={updateShopCart}
-          handleChange={handleChange}
-          products={searchResult}
-          value={value}
-          setValue={setValue}
-          loading={loading}
-          setLoading={setLoading}
-        />} />
-      <Route path="/confirm" render={(props) =>
-        <SummaryPage
-          {...props}
-          products={searchResult}
-          shopCart={shopCart}
-          updateShopCart={updateShopCart}
-
-        />} />
-      <Route path="/transport" render={(props) =>
-        <TransportPage
-          {...props}
-        />} />
-      <Route path="/payment" render={(props) =>
-        <PaymentPage
-          {...props}
-          shopCart={shopCart}
-        />} />
-      <Route path="/completed" render={(props) =>
-        <CompletedPage
-          {...props}
-        />} />
-      <Route component={PageNotFound} />
-    </Switch>
-
-
-  </div>
-
-)
-}*/
 
 export default App;

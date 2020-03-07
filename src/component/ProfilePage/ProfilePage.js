@@ -22,18 +22,22 @@ function ProfilePage() {
     })()
     let summary = []
 
-    function growDiv(name) {
+    function growDiv(index) {
         console.log("growing")
-        var growDiv = document.getElementById(name);
+        let growDiv = document.getElementById("buyRecordProduct" + index);
+        let arrow = document.getElementById("arrow" + index);
+
+
+
         if (growDiv.scrollHeight < 300) { growDiv.style.transition = "0.7s" }
         else { growDiv.style.transition = "1.2s" }
         if (growDiv.clientHeight) {
-
+            arrow.classList.remove("doubleArrowDisplay")
             growDiv.style.height = 0;
 
         } else {
             growDiv.style.height = growDiv.scrollHeight + 'px';
-
+            arrow.classList.add("doubleArrowDisplay")
             //growDiv.style.overflow = "scroll"
             if (growDiv.scrollHeight < 300) { growDiv.style.transition = "0.7s" }
         }
@@ -67,11 +71,16 @@ function ProfilePage() {
                         <div><b>OrderID:</b><div className="flowWhenSmall">{record._id}</div></div>
                         <div><b>Date:</b><div className="flowWhenSmall">{record.date.substring(0, 10)}</div></div>
                         <div><b>Total:</b>${total}</div>
-                        <div><b>Detail:</b><i id={`detailArrowIcon${recordIndex}`} class="fas fa-chevron-circle-right"></i></div>
+                        <div>
+                            <b>Detail:</b>
+                            <i id={`detailArrowIcon${recordIndex}`} class="fas fa-chevron-circle-right"></i>
+                            <div id={`arrow${recordIndex}`} className="doubleArrow"> <i class="fas fa-angle-double-up"></i></div>
+                        </div>
+
 
                     </label>
                     <input style={{ display: "none" }} onClick={() => {
-                        growDiv(("buyRecordProduct" + recordIndex))
+                        growDiv((recordIndex))
                         let thisLabel = document.getElementById(`buyRecordWrapperlabel${recordIndex}`)
                         let collapsed = document.getElementById(`buyRecordProduct${recordIndex}`)
 
@@ -91,7 +100,7 @@ function ProfilePage() {
 
 
 
-                </div>
+                </div >
 
             )
         }

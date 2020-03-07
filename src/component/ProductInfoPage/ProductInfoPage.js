@@ -38,10 +38,7 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                 </h3>
                                 </li>
                                 <li><h3>Sum:${exactProduct.price * value}</h3></li>
-                            </ul>
-                            <div className="addToCartArea">
-
-                                <div
+                                <li className="buyBtn"> <div
                                     className="btn btn-success"
                                     onClick={() => {
                                         SuccessNotify()
@@ -54,18 +51,18 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                     }
                                     }>
                                     Add to Cart</div>
-                                <a href="/checkout">
-                                    <div
-                                        className="btn btn-danger"
-                                        onClick={() => updateShopCart(
-                                            prevState => ({
-                                                ...prevState,
-                                                //id:quantity
-                                                [exactProduct._id]: value
-                                            }))}>Buy Now
+                                    <a href="/checkout">
+                                        <div
+                                            className="btn btn-danger"
+                                            onClick={() => updateShopCart(
+                                                prevState => ({
+                                                    ...prevState,
+                                                    //id:quantity
+                                                    [exactProduct._id]: value
+                                                }))}>Buy Now
                                 </div></a>
-
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className="productDescriptionArea">

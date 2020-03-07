@@ -7,6 +7,8 @@ import Header from './component/navbar/Header';
 import Footer from './component/Footer/Footer';
 import HomePage from './component/HomePage/HomePage';
 import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
+
+//***below import are loadable component
 //import ContactPage from './ContactPage/ContactPage';
 //import CheckOutPage from './component/CheckOutPage/CheckOutPage';
 //import SummaryPage from './component/SummaryPage/SummaryPage'

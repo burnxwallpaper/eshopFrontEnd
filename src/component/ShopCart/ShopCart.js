@@ -67,7 +67,7 @@ function ShopCart({ shopCart, updateShopCart, products }) {
                     marginBottom: "unset"
 
                 }}>
-                It is empty!
+                Empty!
 
             </div>
         )

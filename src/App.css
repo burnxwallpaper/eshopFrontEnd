@@ -1,14 +1,26 @@
 
 html,body,#root {
   height: 100%;
+
   margin: 0;
+}
+@media screen and (max-width: 200px){
+  body{
+  position: absolute;
+  min-width: 200px;
+  }
 }
 
 .App {
   min-height: 100%;
   text-align: center;
   margin-bottom: -50px;
-  padding-bottom: 170px;
+  padding-bottom: 130px;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
 }
 
 a{
