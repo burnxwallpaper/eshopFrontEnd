@@ -29,9 +29,21 @@ function App() {
     updateShopCart(JSON.parse(sessionStorage.getItem("shopCart")))
   }
   //reamin login even refresh page
-  if (sessionStorage.getItem("username") && loginStatus === false) {
-    console.log("retrieve login status from session storage")
-    setLogin(true)
+  if (loginStatus === false) {
+    if (APIfunction.getCookie("token")) {
+      (async () => {
+        let account = await APIfunction.autoLogin()
+        if (account) {
+          sessionStorage.setItem("username", account.username);
+          console.log("auto login success")
+          setLogin(true)
+        } else {
+          setLogin(false)
+          sessionStorage.removeItem("username");
+          console.log("invalid token,auto login fail")
+        }
+      })()
+    }
   }
   //first time load check auto login
   useEffect(() => {

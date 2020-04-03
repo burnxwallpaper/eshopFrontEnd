@@ -140,8 +140,6 @@
   border-radius: 4px;
   padding: 3px 3px;
   z-index: 2;
-  
-  
 }
 .tooltipac:hover:after{
 
@@ -149,7 +147,7 @@
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: center;
-  justify-content: center;
+  justify-content: left;
   transform: translateX(-20%);
   background-color: rgb(65, 48, 48);
   border: 1px groove;
@@ -159,8 +157,7 @@
   margin-top: 6px;
   font-size: 16px;
   padding: 3px;
-  width: 200px;
-  height: 50px;
+  width: 180px;
 }
 
 

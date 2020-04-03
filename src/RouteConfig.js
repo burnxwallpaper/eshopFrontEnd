@@ -6,6 +6,7 @@ import Header from './component/navbar/Header';
 import Footer from './component/Footer/Footer';
 import HomePage from './component/HomePage/HomePage';
 import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
+import UnauthenticatedPage from './component/UnauthenticatedPage/UnauthenticatedPage'
 
 //***below import are loadable component
 //import ContactPage from './ContactPage/ContactPage';
@@ -24,7 +25,7 @@ import ProductInfoPage from './component/ProductInfoPage/ProductInfoPage';
 
 function RouteCongig({
     dataPerPage, filteredResult, pagination, direcToPage, currentPage, searchResult, shopCart, updateShopCart, search, handleChange,
-    displayNoResult, products, value, setValue, loading, setLoading, loginStatus, setLogin, paymentStep, setPaymentStep,...props
+    displayNoResult, products, value, setValue, loading, setLoading, loginStatus, setLogin, paymentStep, setPaymentStep, ...props
 }) {
     let returnHomePage = function (props) {
         return <HomePage
@@ -52,147 +53,146 @@ function RouteCongig({
     const LoadableContactPage = Loadable({
         loader: () => import('./ContactPage/ContactPage'),
         loading: Spinner,
-      });
-      const LoadablePromotionPage = Loadable({
+    });
+    const LoadablePromotionPage = Loadable({
         loader: () => import('./component/PromotionPage/Carousel'),
         loading: Spinner,
-      });
-      const LoadableLoginPage = Loadable({
+    });
+    const LoadableLoginPage = Loadable({
         loader: () => import('./component/LoginPage/LoginPage'),
         loading: Spinner,
-      });
-      const LoadableProfilePage = Loadable({
+    });
+    const LoadableProfilePage = Loadable({
         loader: () => import('./component/ProfilePage/ProfilePage'),
         loading: Spinner,
-      });
-      const LoadableCheckOutPage = Loadable({
+    });
+    const LoadableCheckOutPage = Loadable({
         loader: () => import('./component/CheckOutPage/CheckOutPage'),
         loading: Spinner,
-      });
-      const LoadableSummaryPage = Loadable({
+    });
+    const LoadableSummaryPage = Loadable({
         loader: () => import('./component/SummaryPage/SummaryPage'),
         loading: Spinner,
-      });
-      const LoadableTransportPage = Loadable({
+    });
+    const LoadableTransportPage = Loadable({
         loader: () => import('./component/TransportPage/TransportPage'),
         loading: Spinner,
-      });
-      const LoadablePaymentPage = Loadable({
+    });
+    const LoadablePaymentPage = Loadable({
         loader: () => import('./component/PaymentPage/PaymentPage'),
         loading: Spinner,
-      });
-      const LoadablePageNotFound = Loadable({
+    });
+    const LoadablePageNotFound = Loadable({
         loader: () => import('./component/PageNotFound'),
         loading: Spinner,
-      });
-      const LoadableCompletedPage= Loadable({
+    });
+    const LoadableCompletedPage = Loadable({
         loader: () => import('./component/CompletedPage/CompletedPage'),
         loading: Spinner,
-      });
-      
+    });
+
 
     return (
         <>
-        <div className="App">
-            <Header loginStatus={loginStatus} setLogin={setLogin} updateShopCart={updateShopCart} />
-            <div id="toastBar"></div>
-            <Switch>
-                <Route exact path="/" render={() => returnHomePage()}
-                />
+            <div className="App">
+                <Header loginStatus={loginStatus} setLogin={setLogin} updateShopCart={updateShopCart} />
+                <div id="toastBar"></div>
+                <Switch>
+                    <Route exact path="/" render={() => returnHomePage()} />
+                    <Route path="/unauthenticated" component={UnauthenticatedPage} />
+                    <Route path="/contact" component={LoadableContactPage} />
 
-                <Route path="/contact" component={LoadableContactPage} />
+                    <Route path="/promotion" component={LoadablePromotionPage} />
+                    <Route path="/product/:slug" render={(props) =>
+                        <ProductInfoPage
 
-                <Route path="/promotion" component={LoadablePromotionPage} />
-                <Route path="/product/:slug" render={(props) =>
-                    <ProductInfoPage
-
-                        {...props}
-                        shopCart={shopCart}
-                        updateShopCart={updateShopCart}
-                        handleChange={handleChange}
-                        products={searchResult}
-                        value={value}
-                        setValue={setValue}
-                        loading={loading}
-                        setLoading={setLoading}
-                    />} />
-                <Route path="/login" render={(props) =>
-                    loginStatus ?
-                        <Redirect
-                            to={{
-                                pathname: "/",
-
-                            }}
-                        /> :
-                        <LoadableLoginPage
                             {...props}
-                            loginStatus={loginStatus}
-                            setLogin={setLogin}
-
-                        />
-                } />
-
-                {/*redirect to login if no login*/}
-                {(!loginStatus) && <Redirect to={{pathname: "/login",}}/>}
-
-                <Route path="/profile" render={() =><LoadableProfilePage/>} />
-
-                {/*redirect to homepage for empty shopcart*/}             
-                <Route  exact path="/checkout" render={(props) =>
-                sessionStorage.getItem("shopCart")?
-                    <LoadableCheckOutPage
-                        {...props}
-                        products={searchResult}
-                        shopCart={shopCart}
-                        updateShopCart={updateShopCart}
-                        setPaymentStep={setPaymentStep}
-
-                    />:<Redirect to={{pathname: "/"}}/>} />
-                <Route path="/checkout/transport" render={(props) =>
-                sessionStorage.getItem("shopCart")?
-                    <LoadableTransportPage
-                            {...props}
-                            setPaymentStep={setPaymentStep}
-                />:<Redirect to={{pathname: "/"}}/> } />
-                
-                {/* prevent direct access to /payment and /checkout */}    
-              
-                <Route path="/confirm" render={(props) =>
-            sessionStorage.getItem("shopCart")&&sessionStorage.getItem("method")&&sessionStorage.getItem("address")?
-                        <LoadableSummaryPage
-                            {...props}
-                            products={searchResult}
                             shopCart={shopCart}
                             updateShopCart={updateShopCart}
-                            setPaymentStep={setPaymentStep}
-
-                        /> :<Redirect to={{pathname: "/"}}/>
-                   } 
+                            handleChange={handleChange}
+                            products={searchResult}
+                            value={value}
+                            setValue={setValue}
+                            loading={loading}
+                            setLoading={setLoading}
                         />} />
-               
+                    <Route path="/login" render={(props) =>
+                        loginStatus ?
+                            <Redirect
+                                to={{
+                                    pathname: "/",
+
+                                }}
+                            /> :
+                            <LoadableLoginPage
+                                {...props}
+                                loginStatus={loginStatus}
+                                setLogin={setLogin}
+
+                            />
+                    } />
+
+                    {/*redirect to login if no login*/}
+                    {(!loginStatus) && <Redirect to={{ pathname: "/login", }} />}
+
+                    <Route path="/profile" render={() => <LoadableProfilePage />} />
+
+                    {/*redirect to homepage for empty shopcart*/}
+                    <Route exact path="/checkout" render={(props) =>
+                        sessionStorage.getItem("shopCart") ?
+                            <LoadableCheckOutPage
+                                {...props}
+                                products={searchResult}
+                                shopCart={shopCart}
+                                updateShopCart={updateShopCart}
+                                setPaymentStep={setPaymentStep}
+
+                            /> : <Redirect to={{ pathname: "/" }} />} />
+                    <Route path="/checkout/transport" render={(props) =>
+                        sessionStorage.getItem("shopCart") ?
+                            <LoadableTransportPage
+                                {...props}
+                                setPaymentStep={setPaymentStep}
+                            /> : <Redirect to={{ pathname: "/" }} />} />
+
+                    {/* prevent direct access to /payment and /checkout */}
+
+                    <Route path="/confirm" render={(props) =>
+                        sessionStorage.getItem("shopCart") && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
+                            <LoadableSummaryPage
+                                {...props}
+                                products={searchResult}
+                                shopCart={shopCart}
+                                updateShopCart={updateShopCart}
+                                setPaymentStep={setPaymentStep}
+
+                            /> : <Redirect to={{ pathname: "/" }} />
+                    }
+                    />} />
+
                 <Route path="/payment" render={(props) =>
-sessionStorage.getItem("shopCart")&&sessionStorage.getItem("method")&&sessionStorage.getItem("address")?
-                    <LoadablePaymentPage
-                        {...props}
-                        shopCart={shopCart}
-                        setPaymentStep={setPaymentStep}
-                    />:<Redirect to={{pathname: "/"}}/>
-                } />
-                <Route path="/completed" render={(props) =>
-                paymentStep > 4 ?
-                    <LoadableCompletedPage
-                        {...props}
-                        setPaymentStep={setPaymentStep}
-                    />:
-                    <Redirect to={{pathname: "/checkout",}}/>
-                } />
-                <Route component={LoadablePageNotFound} />
-            </Switch>
-            
+                        sessionStorage.getItem("shopCart") && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
+                            <LoadablePaymentPage
+                                {...props}
+                                shopCart={shopCart}
+                                setPaymentStep={setPaymentStep}
+                            /> : <Redirect to={{ pathname: "/" }} />
+                    } />
+                    <Route path="/completed" render={(props) =>
+                        paymentStep > 4 ?
+                            <LoadableCompletedPage
+                                {...props}
+                                setPaymentStep={setPaymentStep}
+                            /> :
+                            <Redirect to={{ pathname: "/checkout", }} />
+                    } />
+                    <Route component={LoadablePageNotFound} />
+                </Switch>
 
 
-        </div>
-        <Footer />
+
+            </div>
+            <Footer />
         </>
 
     )

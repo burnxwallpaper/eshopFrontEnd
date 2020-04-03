@@ -1,8 +1,13 @@
 import React from 'react';
 
 function PageNotFound() {
+    let style = {
+        position: "relative",
+        top: "100px",
+        margin: "0 auto"
+    }
     return (
-        <div className="contactPage">
+        <div style={style}>
             PageNotFound
 
         </div>

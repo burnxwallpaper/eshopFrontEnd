@@ -1,4 +1,4 @@
-//const URL = "https://mongoser1.herokuapp.com/api/product";
+
 //const URL = "http://localhost:4000";
 const URL = "https://mongoser1.herokuapp.com"
 const prouctURL = "/api/product";
@@ -27,7 +27,11 @@ export async function handleResponse(response) {
     };
     if (response.status === 400) {
         const error = await response.text();
-        throw new Error("Response status 400. API call failed. " + error);
+        window.location.replace("/unauthenticated");
+    }
+    if (response.status === 401) {
+        const error = await response.text();
+        window.location.replace("/unauthenticated");
     }
     //throw new Error("Network response was not ok.");
 }
@@ -102,7 +106,7 @@ export function postPaymentRecord(record) {
         method: "POST",
         headers: {
             "content-type": "application/json",
-            "username": sessionStorage.getItem("username")
+            "token": getCookie("token")
         },
         body: JSON.stringify(record)
     })
@@ -117,7 +121,7 @@ export function getPaymentRecord() {
         method: "GET",
         headers: {
             "content-type": "application/json",
-            "username": sessionStorage.getItem("username")
+            "token": getCookie("token")
         },
 
     })
