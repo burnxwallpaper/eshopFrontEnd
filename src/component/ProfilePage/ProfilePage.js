@@ -7,9 +7,8 @@ import Spinner from '../Common/Spinner'
 function ProfilePage({ loginStatus, ...props }) {
 
     const [temp, setTemp] = useState();
-    /*if (!loginStatus) {
-        return props.history.push('./login')
-    }*/
+    const [currentPage, direcToPage] = useState(1);
+
     let res
     (async () => {
         res = await APIfunction.getPaymentRecord()
@@ -24,9 +23,6 @@ function ProfilePage({ loginStatus, ...props }) {
         console.log("growing")
         let growDiv = document.getElementById("buyRecordProduct" + index);
         let arrow = document.getElementById("arrow" + index);
-
-
-
         if (growDiv.scrollHeight < 300) { growDiv.style.transition = "0.7s" }
         else { growDiv.style.transition = "1.2s" }
         if (growDiv.clientHeight) {
@@ -38,6 +34,57 @@ function ProfilePage({ loginStatus, ...props }) {
             arrow.classList.add("doubleArrowDisplay")
             if (growDiv.scrollHeight < 300) { growDiv.style.transition = "0.7s" }
         }
+    }
+    function pagination(dataPerPage = 5) {
+
+        const minData = (currentPage * dataPerPage) - dataPerPage + 1;
+        const maxData = (currentPage * dataPerPage);
+        const tempData = [];
+        loopArray().forEach((item, index) => {
+            const num = index + 1;
+            if (num >= minData && num <= maxData) {
+                tempData.push(item);
+            }
+        });
+
+        return tempData
+    }
+    function pageNavBar(dataPerPage) {
+        let bar = []
+        console.log(summary.length)
+        let pageNum = Math.ceil(summary.length / dataPerPage)
+        for (let i = 1; i <= pageNum; i++) {
+            bar.push(<button key={`page${i}`} className="pageNavButton"
+                style={{
+                    backgroundColor: `${currentPage === i ? "rgb(158, 227, 248)" : "white"}`
+                }}
+                onClick={() => {
+                    direcToPage(i);
+                    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    document.getElementById("navbar").style.top = "0";
+                }
+                }> {i}</button >)
+        }
+
+        bar.unshift(
+            <button key="prevPage" className="pageNavButton"
+                style={{ visibility: `${currentPage === 1 ? "hidden" : "visible"}` }}
+                onClick={() => {
+                    direcToPage(prev => prev - 1);
+                    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    document.getElementById("navbar").style.top = "0";
+                }
+                }> {`<`} </button >)
+        bar.push(
+            <button key="nextPage" className="pageNavButton"
+                style={{ visibility: `${currentPage === pageNum ? "hidden" : "visible"}` }}
+                onClick={() => {
+                    direcToPage(prev => prev + 1);
+                    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    document.getElementById("navbar").style.top = "0";
+                }
+                }> > </button >)
+        return bar
     }
 
     function loopArray() {
@@ -113,8 +160,8 @@ function ProfilePage({ loginStatus, ...props }) {
                 <h5 style={{ textAlign: "left", marginLeft: "20px", textDecoration: "underline" }}>Purchasement Record:</h5>
                 <div className="buyRecordList">
 
-                    {temp.length === 0 ? "Empty" : loopArray()}
-                    {}
+                    {temp.length === 0 ? "Empty" : pagination()}
+                    {pageNavBar(5)}
                 </div>
 
 
