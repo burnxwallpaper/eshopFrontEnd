@@ -56,7 +56,9 @@ position: relative;
     border-radius: 3px;
 
 }
-
+.buyBtn a{
+    display: inline;
+}
 
 
 @media screen and (max-width: 510px) {
@@ -105,12 +107,12 @@ position: relative;
        text-align: center;
        left:50%
    }
+
    .productBuyArea li .btn{
-margin: 5px auto;
+    margin: 5px auto;
     font-size: 0.8rem;;
     padding:4px;
     width:130px;
-
     display:block;
 
    }

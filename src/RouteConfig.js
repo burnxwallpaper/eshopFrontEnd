@@ -140,6 +140,10 @@ function RouteCongig({ autoLogin, loginProcessCompleted,
                     {/*(!loginStatus) && <Redirect to={{ pathname: "/login", }} />*/}
 
                     {!loginProcessCompleted && <Spinner />}
+                    {/*console.log({
+                        loginStatus: loginStatus,
+                        loginProcessCompleted: loginProcessCompleted
+                    })*/}
                     {(!loginStatus) && loginProcessCompleted && <Redirect to={{ pathname: "/login", }} />}
 
                     <Route exact path="/checkout" render={(props) =>

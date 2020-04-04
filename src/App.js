@@ -50,10 +50,12 @@ function App() {
 
     } else {
       console.log("token not found,auto login fail")
+      setLoginProcessCompleted(true)
       return false
     }
   }
   useEffect(() => {
+    console.log("try login")
     autoLogin()
   }, [loginStatus])
   //load productlist after loading
