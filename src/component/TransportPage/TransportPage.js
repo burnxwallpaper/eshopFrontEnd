@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TransportPage.css';
 
 function TransportPage({ products, shopCart, updateShopCart, setPaymentStep, ...props }) {
-
+    setPaymentStep(2)
     const [address, inputAddress] = useState()
     const [checkedValue, updateValue] = useState()
     const [checkedMethod, updateMethod] = useState()

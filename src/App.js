@@ -28,36 +28,34 @@ function App() {
     console.log("retrieve shopCart saved in session")
     updateShopCart(JSON.parse(sessionStorage.getItem("shopCart")))
   }
-  //reamin login even refresh page
-  if (loginStatus === false) {
+
+  //check auto login
+  const [loginProcessCompleted, setLoginProcessCompleted] = useState(false)
+  async function autoLogin() {
+
+    if (loginStatus) return true;
     if (APIfunction.getCookie("token")) {
-      (async () => {
-        let account = await APIfunction.autoLogin()
-        if (account) {
-          sessionStorage.setItem("username", account.username);
-          console.log("auto login success")
-          setLogin(true)
-        } else {
-          setLogin(false)
-          sessionStorage.removeItem("username");
-          console.log("invalid token,auto login fail")
-        }
-      })()
+      let account = await APIfunction.autoLogin()
+      if (account) {
+        sessionStorage.setItem("username", account.username);
+        console.log("auto login success")
+        setLogin(true)
+        setLoginProcessCompleted(true)
+        return true
+      } else {
+        console.log("invalid token,auto login fail")
+        setLoginProcessCompleted(true)
+        return false
+      }
+
+    } else {
+      console.log("token not found,auto login fail")
+      return false
     }
   }
-  //first time load check auto login
   useEffect(() => {
-    if (APIfunction.getCookie("token")) {
-      (async () => {
-        let account = await APIfunction.autoLogin()
-        if (account) {
-          sessionStorage.setItem("username", account.username);
-          console.log("auto login success")
-          setLogin(true)
-        } else { console.log("invalid token,auto login fail") }
-      })()
-    } else { console.log("token not found,auto login fail") }
-  }, [])
+    autoLogin()
+  }, [loginStatus])
   //load productlist after loading
   useEffect(() => {
     async function getProducts() {
@@ -112,6 +110,8 @@ function App() {
 
   return (
     <RouteConfig
+      loginProcessCompleted={loginProcessCompleted}
+      autoLogin={autoLogin}
       dataPerPage={8}
       filteredResult={filteredResult}
       pagination={pagination}

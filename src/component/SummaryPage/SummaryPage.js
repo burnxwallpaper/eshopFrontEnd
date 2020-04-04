@@ -40,8 +40,8 @@ function SummaryPage({ products, shopCart }) {
                 </div>);
         }
     }
-    if (total === 0) { return <Spinner /> }
-    else return (
+
+    return (
         <div className="SummaryPage">
 
             <h1>Summary</h1>
@@ -64,7 +64,7 @@ function SummaryPage({ products, shopCart }) {
 
                 </div>
             </div>
-            <div className="btn btn-info"><Link to='/payment'>Confirm</Link></div>
+            {total > 0 && <Link to='/payment' className="btn btn-info" >Confirm</Link>}
 
 
         </div>

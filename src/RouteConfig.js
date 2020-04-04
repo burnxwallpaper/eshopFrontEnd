@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Spinner from './component/Common/Spinner'
@@ -23,13 +23,14 @@ import UnauthenticatedPage from './component/UnauthenticatedPage/Unauthenticated
 //import * as APIfunction from './APIfunction/APIfunction'
 //import SuccessNotify from './component/Common/SuccessNotify'  
 
-function RouteCongig({
+function RouteCongig({ autoLogin, loginProcessCompleted,
     dataPerPage, filteredResult, pagination, direcToPage, currentPage, searchResult, shopCart, updateShopCart, search, handleChange,
     displayNoResult, products, value, setValue, loading, setLoading, loginStatus, setLogin, paymentStep, setPaymentStep, ...props
 }) {
     let returnHomePage = function (props) {
         return <HomePage
             {...props}
+
             dataPerPage={8}
             filteredResult={filteredResult}
             pagination={pagination}
@@ -91,14 +92,13 @@ function RouteCongig({
         loading: Spinner,
     });
 
-
     return (
         <>
             <div className="App">
                 <Header loginStatus={loginStatus} setLogin={setLogin} updateShopCart={updateShopCart} />
                 <div id="toastBar"></div>
                 <Switch>
-                    <Route exact path="/" render={() => returnHomePage()} />
+                    <Route exact path="/" render={() => returnHomePage(props)} />
                     <Route path="/unauthenticated" component={UnauthenticatedPage} />
                     <Route path="/contact" component={LoadableContactPage} />
 
@@ -132,24 +132,29 @@ function RouteCongig({
                             />
                     } />
 
+                    <Route path="/profile" render={(props) =>
+                        <LoadableProfilePage
+                            {...props}
+                            loginStatus={loginStatus} />} />
                     {/*redirect to login if no login*/}
-                    {(!loginStatus) && <Redirect to={{ pathname: "/login", }} />}
+                    {/*(!loginStatus) && <Redirect to={{ pathname: "/login", }} />*/}
 
-                    <Route path="/profile" render={() => <LoadableProfilePage />} />
+                    {!loginProcessCompleted && <Spinner />}
+                    {console.log({ loginStatus: loginStatus, loginProcessCompleted: loginProcessCompleted })}
+                    {(!loginStatus) && loginProcessCompleted && <Redirect to={{ pathname: "/login", }} />}
 
-                    {/*redirect to homepage for empty shopcart*/}
                     <Route exact path="/checkout" render={(props) =>
-                        sessionStorage.getItem("shopCart") ?
-                            <LoadableCheckOutPage
-                                {...props}
-                                products={searchResult}
-                                shopCart={shopCart}
-                                updateShopCart={updateShopCart}
-                                setPaymentStep={setPaymentStep}
 
-                            /> : <Redirect to={{ pathname: "/" }} />} />
+                        <LoadableCheckOutPage
+                            {...props}
+                            products={searchResult}
+                            shopCart={shopCart}
+                            updateShopCart={updateShopCart}
+                            setPaymentStep={setPaymentStep}
+
+                        />} />
                     <Route path="/checkout/transport" render={(props) =>
-                        sessionStorage.getItem("shopCart") ?
+                        Object.keys(shopCart).length > 0 ?
                             <LoadableTransportPage
                                 {...props}
                                 setPaymentStep={setPaymentStep}
@@ -158,7 +163,7 @@ function RouteCongig({
                     {/* prevent direct access to /payment and /checkout */}
 
                     <Route path="/confirm" render={(props) =>
-                        sessionStorage.getItem("shopCart") && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
+                        Object.keys(shopCart).length > 0 && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
                             <LoadableSummaryPage
                                 {...props}
                                 products={searchResult}
@@ -171,11 +176,12 @@ function RouteCongig({
                     />} />
 
                 <Route path="/payment" render={(props) =>
-                        sessionStorage.getItem("shopCart") && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
+                        Object.keys(shopCart).length > 0 && sessionStorage.getItem("method") && sessionStorage.getItem("address") ?
                             <LoadablePaymentPage
                                 {...props}
                                 shopCart={shopCart}
                                 setPaymentStep={setPaymentStep}
+                                updateShopCart={updateShopCart}
                             /> : <Redirect to={{ pathname: "/" }} />
                     } />
                     <Route path="/completed" render={(props) =>

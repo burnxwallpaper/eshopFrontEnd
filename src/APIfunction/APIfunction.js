@@ -1,6 +1,6 @@
 
-//const URL = "http://localhost:4000";
-const URL = "https://mongoser1.herokuapp.com"
+const URL = "http://localhost:4000";
+//const URL = "https://mongoser1.herokuapp.com"
 const prouctURL = "/api/product";
 const PRL = URL + prouctURL;
 
@@ -100,7 +100,7 @@ export function autoLogin(account) {
         .catch(handleError)
 }
 
-export function postPaymentRecord(record) {
+export async function postPaymentRecord(record) {
 
     return fetch(URL + "/order", {
         method: "POST",

@@ -4,9 +4,12 @@ import * as APIfunction from '../../APIfunction/APIfunction';
 import Spinner from '../Common/Spinner'
 
 
-function ProfilePage() {
+function ProfilePage({ loginStatus, ...props }) {
 
     const [temp, setTemp] = useState();
+    /*if (!loginStatus) {
+        return props.history.push('./login')
+    }*/
     let res
     (async () => {
         res = await APIfunction.getPaymentRecord()
@@ -64,6 +67,8 @@ function ProfilePage() {
                             <b>{recordIndex + 1}</b></div>
                         <div><b>OrderID:</b><div className="flowWhenSmall">{record._id}</div></div>
                         <div><b>Date:</b><div className="flowWhenSmall">{record.date.substring(0, 10)}</div></div>
+                        <div><b>Transport:</b><div className="flowWhenSmall">{record.transport}</div></div>
+                        <div><b>Destination:</b><div className="flowWhenSmall">{record.destination}</div></div>
                         <div><b>Total:</b>${total}</div>
                         <div>
                             <b>Detail:</b>

@@ -18,6 +18,9 @@ position: relative;
     float: left;
     margin-right: 3vw;
 }
+.productInfoImgArea img{
+    max-width: 200px;
+}
 
 .productBuyArea{
     text-align: left;

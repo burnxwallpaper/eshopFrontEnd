@@ -1,15 +1,17 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './ProductInfoPage.css';
 import ShopCart from '../ShopCart/ShopCart'
 import Mockdata from '../Mockdata'
 import SuccessNotify from '../Common/SuccessNotify'
 import mockDescription from './mockDescription'
+import { Link } from 'react-router-dom';
 
 
-function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, value, setValue, loading, setLoading }) {
-
+function ProductInfoPage({ updateShopCart, shopCart, products,value,setValue,handleChange, loading, setLoading, ...props }) {
+    
     if (!loading && products.length === 0) { setLoading(true) } else if (loading && products.length > 0) { setLoading(false) }
     //get product after loading productlist
+
     if (!loading && products.length > 0) {
         let productID = window.location.pathname.substring(9)
         !value && setValue(1)
@@ -28,7 +30,8 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                 <li><h3>Name:{exactProduct.name}</h3></li>
                                 <li><h3>Price:${exactProduct.price}</h3></li>
                                 <li><h3>Quantity:
-                                    <div >
+                                
+                                <div >
                                         <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = (prev > 1 ? prev - 1 : 1))}><i className="fas fa-minus-square"></i></div>
                                         <input value={value} onChange={handleChange} ></input>
                                         <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = prev + 1)}><i className="fas fa-plus-square"></i></div>
@@ -48,15 +51,15 @@ function ProductInfoPage({ updateShopCart, shopCart, products, handleChange, val
                                     }
                                     }>
                                     Add to Cart</div>
-                                    <a href="/checkout">
-                                        <div
-                                            className="btn btn-danger"
-                                            onClick={() => updateShopCart(
-                                                prevState => ({
-                                                    ...prevState,
-                                                    [exactProduct._id]: value
-                                                }))}>Buy Now
-                                </div></a>
+
+                                    <Link to='/checkout' className="btn btn-danger"
+                                        onClick={() => {updateShopCart(
+                                            prevState => ({
+                                                ...prevState,
+                                                [exactProduct._id]: value
+                                            }))
+                                        }}>Buy Now
+                                </Link>
                                 </li>
                             </ul>
                         </div>

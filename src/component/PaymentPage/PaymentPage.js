@@ -18,15 +18,19 @@ function PaymentPage({ products, shopCart, updateShopCart, setPaymentStep, ...pr
 
                 }
 
-                let func = APIfunction.postPaymentRecord(summary)
 
+                let func = APIfunction.postPaymentRecord(summary)
                 let finish = await Processing(func)
                 if (finish) {
-                    setPaymentStep(5)
-                    sessionStorage.removeItem('shopCart')
-                    sessionStorage.removeItem('method')
-                    sessionStorage.removeItem('address')
-                    return setTimeout(() => props.history.push('/completed'), 5000)
+
+                    return setTimeout(() => {
+                        setPaymentStep(5)
+                        sessionStorage.removeItem('shopCart')
+                        sessionStorage.removeItem('method')
+                        sessionStorage.removeItem('address')
+                        updateShopCart({})
+                        props.history.push('/completed')
+                    }, 5000)
                 }
 
 
@@ -42,7 +46,7 @@ function PaymentPage({ products, shopCart, updateShopCart, setPaymentStep, ...pr
             <input className="" id="creditCard" pattern="[0-9]{3}" type="tel" maxLength="3" required>
             </input>
             <br></br>
-            <label for="creditCard">Expiration Date</label>
+            <label for="creditCard">Expiration Date (not requireed)</label>
             <input className="" id="creditCard" type="date" >
             </input>
             <br></br>

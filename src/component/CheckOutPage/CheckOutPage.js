@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 
 function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep }) {
+    setPaymentStep(1)
     function handleChange(e) {
         let { name, value, max, min } = e.target;
         if (value > Number(max) || value < Number(min)) return
@@ -49,8 +50,7 @@ function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep }) {
                 </div>);
         }
     }
-    if (total === 0) { return <Spinner /> }
-    else return (
+    return (
         <div className="CheckOutPage">
             <h2>CheckOutPage</h2>
             <div className="">{Summary}</div>
@@ -58,7 +58,7 @@ function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep }) {
 
             <h2>Total:${total}</h2>
             <br></br>
-            <div onClick={setPaymentStep(2)}><Link to='/checkout/transport' className="btn btn-info">Confirm</Link></div>
+            {total > 0 && <Link to='/checkout/transport' className="btn btn-info">Confirm</Link>}
 
 
         </div>

@@ -45,15 +45,12 @@ function HomePage({
                 }> > </button >)
         return bar
     }
-    return (
-
+    if (loading) { return <Spinner /> }
+    else return (
         <>
             <div className="mainArea">
-
                 <SearchBar updateShopCart={updateShopCart} search={search} handleChange={handleChange} value={value} />
                 <div style={{ height: "50px", top: "50px" }}>{displayNoResult && <div className="alert alert-warning" role="alert" >No result!</div>}</div>
-
-                {loading && <Spinner />}
                 <ShopCart updateShopCart={updateShopCart} shopCart={shopCart} handleChange={handleChange}
                     products={products}
                     value={value}
@@ -66,14 +63,11 @@ function HomePage({
                             }
                         </div>
                     </div>}
-
                 {!loading && <div className="pageNavBar">
 
                     <br></br>
                     {pageNavBar(dataPerPage)}
                 </div>}
-
-
             </div>
         </>
     )

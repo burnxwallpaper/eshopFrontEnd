@@ -22,11 +22,6 @@ function Product({ product, updateShopCart }) {
                 className="btn btn-secondary"
 
                 onClick={() => {
-                    /*let temp = document.createElement("div");
-                    let location = document.getElementById("toastBar").appendChild(temp);
-                    render(<SuccessNotify words={"Added successfully!"} color={"green"} />, location);
-                    let removeNotify = () => location.parentNode.removeChild(location);
-                    setTimeout(removeNotify, 3000)*/
                     SuccessNotify()
                     updateShopCart(
                         prevState => ({
