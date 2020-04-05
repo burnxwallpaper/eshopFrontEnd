@@ -56,6 +56,18 @@ position: relative;
     border-radius: 3px;
 
 }
+.productBuyArea input::-webkit-outer-spin-button,
+.productBuyArea input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.productBuyArea input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 .buyBtn a{
     display: inline;
 }

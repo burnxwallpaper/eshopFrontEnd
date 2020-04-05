@@ -2,7 +2,7 @@
   display: block;
 margin: 0 auto;
     width: 120px;
-    height: 120px;
+    height: auto;
   }
 
 .product{
@@ -16,8 +16,17 @@ margin: 0 auto;
     */
     margin:10px auto;
     float: left;
- 
-
+}
+.product >div:first-child{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 120px;
+}
+.btn.btn-success:hover{
+  box-shadow: 0 0 2px 2px rgb(167, 163, 163);
 }
 @media screen and (max-width: 768px) {
   .product {

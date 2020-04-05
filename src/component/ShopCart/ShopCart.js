@@ -5,8 +5,10 @@ import './shopCart.css'
 function ShopCart({ shopCart, updateShopCart, products }) {
     function handleChange(e) {
         let { name, value, max, min } = e.target;
-        if (value > Number(max) || value < Number(min)) return
-        updateShopCart(prev => ({ ...prev, [name]: value }))
+        //min=1,max=99
+        if (!value.match(/[0-9]/)) { return }
+        if (value > 99 || value < 1) return
+        updateShopCart(prev => ({ ...prev, [name]: Number(value) }))
         e.preventDefault()
     }
     function deleteProduct(product) {

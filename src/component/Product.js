@@ -11,15 +11,18 @@ function Product({ product, updateShopCart }) {
     return (
 
         <div className="product" key={product._id}>
-            <Link to={`/product/${product._id}`}><img src={product.image} alt="" className="productImg"></img></Link>
-
+            <div>
+                <Link to={`/product/${product._id}`}>
+                    <img src={product.image} alt="" className="productImg"></img>
+                </Link>
+            </div>
             <b>Name:</b> {product.name}
             <br></br>
             <b>Price:</b> ${product.price}
             <br></br>
 
             <div
-                className="btn btn-secondary"
+                className="btn btn-success"
 
                 onClick={() => {
                     SuccessNotify()

@@ -10,7 +10,7 @@ function CheckOutPage({ products, shopCart, updateShopCart, setPaymentStep }) {
     function handleChange(e) {
         let { name, value, max, min } = e.target;
         if (value > Number(max) || value < Number(min)) return
-        updateShopCart(prev => ({ ...prev, [name]: value }))
+        updateShopCart(prev => ({ ...prev, [name]: Number(value) }))
         e.preventDefault()
 
     }

@@ -17,9 +17,14 @@ ul{
 }
 
 .buyRecordEach{
+
     border-bottom: 1px groove black;
     text-align: left;
     width: 100%;
+}
+
+.buyRecordEach div{
+    word-break: break-word;
 }
 
 .buyRecordEach label{
@@ -40,7 +45,8 @@ ul{
 }
 
 .buyRecordProductEach img{
-    display: block;
+    display: flex;
+    align-self: center;
     float: left;
     width:90px;
 }
@@ -69,6 +75,9 @@ ul{
 @media screen and (max-width: 315px) {
     .flowWhenSmall{
         display: block;
+    }
+    .buyRecordList{
+        font-size: 0.8em;
     }
 
 }

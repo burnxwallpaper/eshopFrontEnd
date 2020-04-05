@@ -7,8 +7,16 @@ import mockDescription from './mockDescription'
 import { Link } from 'react-router-dom';
 
 
-function ProductInfoPage({ updateShopCart, shopCart, products,value,setValue,handleChange, loading, setLoading, ...props }) {
+function ProductInfoPage({ updateShopCart, shopCart, products, loading, setLoading, ...props }) {
+    const [value, setValue] = useState()
+    function handleChange(e) {
+        let temp = e.target.value;
+        if (temp > 99 || temp < 1) return
+        if(!e.target.value.match(/[0-9]/)){return}
+        setValue(temp)
+        e.preventDefault()
     
+      }
     if (!loading && products.length === 0) { setLoading(true) } else if (loading && products.length > 0) { setLoading(false) }
     //get product after loading productlist
 
@@ -33,7 +41,7 @@ function ProductInfoPage({ updateShopCart, shopCart, products,value,setValue,han
                                 
                                 <div >
                                         <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = (prev > 1 ? prev - 1 : 1))}><i className="fas fa-minus-square"></i></div>
-                                        <input value={value} onChange={handleChange} ></input>
+                                        <input value={value} onChange={handleChange} type="number"></input>
                                         <div style={{ cursor: "pointer" }} onClick={() => setValue(prev => prev = prev + 1)}><i className="fas fa-plus-square"></i></div>
                                     </div>
                                 </h3>
@@ -56,7 +64,7 @@ function ProductInfoPage({ updateShopCart, shopCart, products,value,setValue,han
                                         onClick={() => {updateShopCart(
                                             prevState => ({
                                                 ...prevState,
-                                                [exactProduct._id]: value
+                                                [exactProduct._id]: Number(value)
                                             }))
                                         }}>Buy Now
                                 </Link>
