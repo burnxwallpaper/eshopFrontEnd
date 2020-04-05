@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import './LoginPage.scss'
 import LoginValid from './LoginValid'
@@ -8,7 +8,10 @@ import SuccessNotify from '../Common/SuccessNotify'
 
 function LoginPage({ setLogin }) {
     const [loginFail, setLoginFail] = useState()
-
+    useEffect(() => {
+        document.getElementById('Footer').style.display = 'none'
+        return () => document.getElementById('Footer').style.display = 'block'
+    }, [])
     //let url = window.location.protocol + '//' + window.location.host;
     //document.cookie && window.location.replace(url)
 
@@ -24,6 +27,7 @@ function LoginPage({ setLogin }) {
                     setLogin(true)
                     //setLoginFail(false)
                     SuccessNotify("Wellcome back, " + res + "!")
+
                     history.push("/")
                 } else {
 
