@@ -2,32 +2,49 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 4000;
-const DB_URL = process.env.MONGODB_URI || "mongodb+srv://cheukheisiu:970204leo@cluster0-m0cdc.mongodb.net/eshopAPI" || 'mongodb://localhost:27017/eshopAPI'
-const db = mongoose.connect('mongodb+srv://cheukheisiu:970204leo@eshopapi-m0cdc.mongodb.net/eshopAPI?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/eshopAPI'
+const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 const Product = require('./recordModel');
+const Account = require('./accountModel');
+const Order = require('./orderModel');
 const productRouter = require('./recordRouter')(Product);
+const accountRouter = require('./accountRouter')(Account);
+const orderRouter = require('./orderRouter')(Order, Product, Account);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
-
+app.use(cors());
 app.use((req, res, next) => {
     res.set({
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "*",
-        "Content-Type": "text/html"
+        "Access-Control-Allow-Credentials": "true"
+        //"Content-Type": "text/html"
     })
     next()
 })
 
+
+
+
 app.use('/api', productRouter);
+
+app.use('/authentication', accountRouter);
+
+app.use('/order', orderRouter);
+
+
 
 app.get('/', (req, res) => {
     res.send('welcome');
 });
+
 
 
 app.listen(port, () => {
